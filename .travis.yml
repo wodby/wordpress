@@ -1,0 +1,39 @@
+language: python
+
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+    - LATEST_WORDPRESS=4
+    - LATEST_PHP=7.1
+  matrix:
+    - WORDPRESS=4 PHP=7.0
+    - WORDPRESS=4 PHP=7.1
+
+script:
+  - cd ./$WORDPRESS/$PHP
+  - make && make test
+
+after_success: |
+  if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
+    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    make release
+
+    if [ -n "$TRAVIS_TAG" ]; then
+      make VERSION="$WORDPRESS-$PHP-$TRAVIS_TAG" release
+    fi
+
+    if [ "$WORDPRESS" == "$LATEST_WORDPRESS" && "$PHP" == "$LATEST_PHP" ]; then
+      make VERSION=latest release
+    fi
+  fi
+
+after_failure: make logs
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
