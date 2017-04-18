@@ -1,4 +1,4 @@
-FROM wodby/wordpress-php:7.1-2.1.0
+FROM wodby/wordpress-php:7.1
 
 ENV WORDPRESS_VERSION 4.7.3
 ENV WORDPRESS_SHA1 35adcd8162eae00d5bc37f35344fdc06b22ffc98
