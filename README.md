@@ -1,4 +1,4 @@
-# Docker images based on wodby/wordpress-php with WordPress core inside
+# Docker images based on wodby/wordpress-php with vanilla WordPress
 
 [![Build Status](https://travis-ci.org/wodby/wordpress.svg?branch=master)](https://travis-ci.org/wodby/wordpress)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
@@ -8,12 +8,34 @@ To get full docker-based local environment for WordPress see [Docker4WordPress](
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`4-7.0`, (*4-7.0/Dockerfile*)](https://github.com/wodby/wordpress/tree/master/4/7.0/Dockerfile)
-- [`4-7.1`, (*4-7.1/Dockerfile*)](https://github.com/wodby/wordpress/tree/master/4/7.1/Dockerfile)
+- [`4-7.0-2.1.0`, `4-7.0`, (*4-7.0/Dockerfile*)](https://github.com/wodby/wordpress/tree/master/4/7.0/Dockerfile)
+- [`4-7.0-2.1.0`, `4-7.1`, (*4-7.1/Dockerfile*)](https://github.com/wodby/wordpress/tree/master/4/7.1/Dockerfile)
 
 ## Environment Variables Available for Customization
 
 See at [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
+
+## Actions
+
+Usage:
+
+```
+make COMMAND [params ...]
+ 
+commands:
+    check-ready [max_try=<10> wait_seconds=<5>]
+     
+default params values:
+    max_try 10
+    wait_seconds 1
+```
+
+Examples:
+
+```bash
+# Wait for WordPress to be copied
+$ docker exec -ti [ID] make check-ready -f /usr/local/bin/actions.mk
+```
 
 ## Using in Production
 
