@@ -7,5 +7,5 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 make start
-docker exec --user=82 "${NAME}" wp core --path="${APP_ROOT}" version | grep -q '4.*'
+docker exec --user=82 "${NAME}" wp core version | grep -q '4.*'
 make clean
