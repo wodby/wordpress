@@ -1,9 +1,6 @@
 -include /usr/local/bin/wordpress-php.mk
 
-.PHONY: check-ready
+.PHONY: init
 
-max_try ?= 10
-wait_seconds ?= 1
-
-check-ready:
-	wait-for-wp-copy.sh $(max_try) $(wait_seconds)
+init:
+	init.sh

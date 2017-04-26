@@ -23,18 +23,8 @@ Usage:
 make COMMAND [params ...]
  
 commands:
-    check-ready [max_try=<10> wait_seconds=<5>]
-     
-default params values:
-    max_try 10
-    wait_seconds 1
-```
+    init
 
-Examples:
-
-```bash
-# Wait for WordPress to be copied
-$ docker exec -ti [ID] make check-ready -f /usr/local/bin/actions.mk
 ```
 
 ## Using in Production

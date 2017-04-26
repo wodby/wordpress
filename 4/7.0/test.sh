@@ -7,11 +7,11 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 cid="$(
-	docker run -d --name "${NAME}" "${IMAGE}"
+	docker run -d -e WP_VERSION=4 --name "${NAME}" "${IMAGE}"
 )"
 trap "docker rm -vf ${cid} > /dev/null" EXIT
 
-docker exec --user=82 "${NAME}" make check-ready -f /usr/local/bin/actions.mk
+docker exec --user=82 "${NAME}" make init -f /usr/local/bin/actions.mk
 echo -n "Checking WordPress version... "
 docker exec --user=82 "${NAME}" wp core version | grep -q '4.*'
 echo "OK"
