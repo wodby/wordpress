@@ -1,32 +1,25 @@
-# Docker images based on wodby/wordpress-php with vanilla WordPress
+# Vanilla WordPress Docker Container Image
 
 [![Build Status](https://travis-ci.org/wodby/wordpress.svg?branch=master)](https://travis-ci.org/wodby/wordpress)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
+[![Wodby Slack](http://slack.wodby.com/badge.svg)](http://slack.wodby.com)
 
-To get full docker-based local environment for WordPress see [Docker4WordPress](http://docker4wordpress.org)
+## Docker Images
 
-## Supported tags and respective `Dockerfile` links
+Images are built via [Travis CI](https://travis-ci.org/wodby/wordpress) and published on [Docker Hub](https://hub.docker.com/r/wodby/wordpress). 
 
-- [`4-7.0-2.1.0`, `4-7.0`, (*4-7.0/Dockerfile*)](https://github.com/wodby/wordpress/tree/master/4/7.0/Dockerfile)
-- [`4-7.0-2.1.0`, `4-7.1`, (*4-7.1/Dockerfile*)](https://github.com/wodby/wordpress/tree/master/4/7.1/Dockerfile)
+## Versions
 
-## Environment Variables Available for Customization
+| WordPress | PHP | Alpine Linux |
+| --------- | --- | ------------ |
+| 4.x | [7.1](https://github.com/wodby/wordpress/tree/master/4/7.1/Dockerfile) | 3.6 |  
+| 4.x | [7.0](https://github.com/wodby/wordpress/tree/master/4/7.0/Dockerfile) | 3.6 |  
+
+## Environment Variables
 
 See at [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
 
-## Actions
+## Complete WordPress Stack
 
-Usage:
-
-```
-make COMMAND [params ...]
- 
-commands:
-    init
-
-```
-
-## Using in Production
-
-Deploy docker-based infrastructure for WordPress to your own server via [![Wodby](https://www.google.com/s2/favicons?domain=wodby.com) Wodby](https://wodby.com).
+See [Docker4WordPress](https://github.com/wodby/docker4wordpress).
