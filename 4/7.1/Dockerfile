@@ -1,4 +1,4 @@
-FROM wodby/wordpress-php:7.1
+FROM wodby/wordpress-php:7.1-2.2.0
 
 RUN mv /usr/local/bin/actions.mk /usr/local/bin/wordpress-php.mk && \
     mkdir -p /usr/src/wordpress && \
