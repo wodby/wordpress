@@ -11,10 +11,10 @@ NAME = wordpress-$(TAG)
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) ./
+	docker build -t $(REPO):$(TAG) --build-arg PHP_VER=$(PHP_VER) ./
 
 test:
-	NAME=$(NAME) IMAGE=$(REPO):$(TAG) --build-arg PHP_VER=$(PHP_VER) ./test.sh
+	IMAGE=$(REPO):$(TAG) ./test.sh
 
 push:
 	docker push $(REPO):$(TAG)
