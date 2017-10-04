@@ -1,9 +1,16 @@
-FROM wodby/wordpress-php:7.0
+ARG PHP_VER
 
-RUN mv /usr/local/bin/actions.mk /usr/local/bin/wordpress-php.mk && \
+FROM wodby/wordpress-php:${PHP_VER}
+
+USER root
+
+RUN set -ex && \
+    mv /usr/local/bin/actions.mk /usr/local/bin/wordpress-php.mk && \
     mkdir -p /usr/src/wordpress && \
 	chown -R www-data:www-data /usr/src/wordpress && \
 	su-exec www-data wp core download --path=/usr/src/wordpress
+
+USER www-data
 
 COPY init /docker-entrypoint-init.d/
 COPY actions /usr/local/bin/
