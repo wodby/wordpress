@@ -7,12 +7,17 @@ services:
 
 env:
   global:
+    - DOCKER_VERSION=17.06.2
     - LATEST_WORDPRESS=4
     - LATEST_PHP_VER=7.1
   matrix:
     - WORDPRESS=4 PHP_VER=7.1
     - WORDPRESS=4 PHP_VER=7.0
     - WORDPRESS=4 PHP_VER=5.6
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce="${DOCKER_VERSION}~ce-0~ubuntu"
 
 script:
   - cd ./$WORDPRESS
