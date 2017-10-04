@@ -15,7 +15,7 @@ env:
     - WORDPRESS=4 PHP_VER=5.6
 
 script:
-  - cd ./$WORDPRESS/$PHP_VER
+  - cd ./$WORDPRESS
   - make && make test
 
 after_success: |
