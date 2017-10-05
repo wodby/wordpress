@@ -23,6 +23,8 @@ For better reliability we release images with stability tags (`wodby/wordpress:4
 | [4-7.0-debug](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 7.0 |
 | [4-5.6-debug](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 5.6 |
 
+> Images with -debug tag run php compiled with --enable-debug flag  
+
 ## Environment Variables
 
 See at [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
