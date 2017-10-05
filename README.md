@@ -7,15 +7,21 @@
 
 ## Docker Images
 
-Images are based on [wodby/wordpress-php](https://github.com/wodby/wordpress-php), built via [Travis CI](https://travis-ci.org/wodby/wordpress) and published on [Docker Hub](https://hub.docker.com/r/wodby/wordpress). 
+* All images are based on Alpine Linux
+* Base image: [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
+* [Travis CI builds](https://travis-ci.org/wodby/wordpress) 
+* [Docker Hub](https://hub.docker.com/r/wodby/wordpress)
 
-## Versions
+For better reliability we release images with stability tags (`wodby/wordpress:4-7.1-X.X.X`) which correspond to git tags. We **strongly recommend** using images only with stability tags. Below listed basic tags:
 
-| Image tag (Dockerfile)                                               | WordPress | PHP | Alpine Linux |
-| -------------------------------------------------------------------- | --------- | --- | ------------ |
-| [4-7.1](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 7.1 | 3.6          |
-| [4-7.0](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 7.0 | 3.6          |
-| [4-5.6](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 5.6 | 3.6          |
+| Image tag (Dockerfile)                                                     | WordPress | PHP |
+| -------------------------------------------------------------------------- | --------- | --- |
+| [4-7.1](https://github.com/wodby/wordpress/tree/master/4/Dockerfile)       | 4.x       | 7.1 |
+| [4-7.0](https://github.com/wodby/wordpress/tree/master/4/Dockerfile)       | 4.x       | 7.0 |
+| [4-5.6](https://github.com/wodby/wordpress/tree/master/4/Dockerfile)       | 4.x       | 5.6 |
+| [4-7.1-debug](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 7.1 |
+| [4-7.0-debug](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 7.0 |
+| [4-5.6-debug](https://github.com/wodby/wordpress/tree/master/4/Dockerfile) | 4.x       | 5.6 |
 
 ## Environment Variables
 
