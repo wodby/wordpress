@@ -1,6 +1,6 @@
-ARG PHP_VER
+ARG FROM_TAG
 
-FROM wodby/wordpress-php:${PHP_VER}
+FROM wodby/wordpress-php:${FROM_TAG}
 
 USER root
 

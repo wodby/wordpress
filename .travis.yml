@@ -10,10 +10,14 @@ env:
     - DOCKER_VERSION=17.06.2
     - LATEST_WORDPRESS=4
     - LATEST_PHP_VER=7.1
+    - FROM_STABILITY_TAG=""
   matrix:
-    - WORDPRESS=4 PHP_VER=7.1
-    - WORDPRESS=4 PHP_VER=7.0
-    - WORDPRESS=4 PHP_VER=5.6
+    - WORDPRESS=4 PHP_VER=7.1 PHP_DEBUG=0
+    - WORDPRESS=4 PHP_VER=7.0 PHP_DEBUG=0
+    - WORDPRESS=4 PHP_VER=5.6 PHP_DEBUG=0
+    - WORDPRESS=4 PHP_VER=7.1 PHP_DEBUG=1
+    - WORDPRESS=4 PHP_VER=7.0 PHP_DEBUG=1
+    - WORDPRESS=4 PHP_VER=5.6 PHP_DEBUG=1
 
 before_install:
   - sudo apt-get update
@@ -29,10 +33,10 @@ after_success: |
     make release
 
     if [ -n "$TRAVIS_TAG" ]; then
-      make TAG="$WORDPRESS-$PHP_VER-$TRAVIS_TAG" release
+      make release TAG="$WORDPRESS-$PHP_VER-$TRAVIS_TAG"
     fi
 
-    if [ "$WORDPRESS" == "$LATEST_WORDPRESS" && "$PHP_VER" == "$LATEST_PHP_VER" ]; then
-      make TAG=latest release
+    if [ "$WORDPRESS" == "$LATEST_WORDPRESS" && "$PHP_VER" == "$LATEST_PHP_VER" && $PHP_DEBUG != 1 ]; then
+      make release TAG=latest
     fi
   fi
