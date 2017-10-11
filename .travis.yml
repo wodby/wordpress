@@ -8,35 +8,35 @@ services:
 env:
   global:
     - DOCKER_VERSION=17.06.2
-    - LATEST_WORDPRESS=4
+    - LATEST_WP_VER=4
     - LATEST_PHP_VER=7.1
     - FROM_STABILITY_TAG=""
   matrix:
-    - WORDPRESS=4 PHP_VER=7.1 PHP_DEBUG=0
-    - WORDPRESS=4 PHP_VER=7.0 PHP_DEBUG=0
-    - WORDPRESS=4 PHP_VER=5.6 PHP_DEBUG=0
-    - WORDPRESS=4 PHP_VER=7.1 PHP_DEBUG=1
-    - WORDPRESS=4 PHP_VER=7.0 PHP_DEBUG=1
-    - WORDPRESS=4 PHP_VER=5.6 PHP_DEBUG=1
+    - WP_VER=4 PHP_VER=7.1 PHP_DEBUG=0
+    - WP_VER=4 PHP_VER=7.0 PHP_DEBUG=0
+    - WP_VER=4 PHP_VER=5.6 PHP_DEBUG=0
+    - WP_VER=4 PHP_VER=7.1 PHP_DEBUG=1
+    - WP_VER=4 PHP_VER=7.0 PHP_DEBUG=1
+    - WP_VER=4 PHP_VER=5.6 PHP_DEBUG=1
 
 before_install:
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce="${DOCKER_VERSION}~ce-0~ubuntu"
 
 script:
-  - cd ./$WORDPRESS
+  - cd ./"${WP_VER}"
   - make && make test
 
 after_success: |
-  if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([ "$TRAVIS_BRANCH" == "master" ] || [ -n "$TRAVIS_TAG" ]); then
-    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  if [[ "${TRAVIS_PULL_REQUEST}" == "false" && ("${TRAVIS_BRANCH}" == "master"  || -n "${TRAVIS_TAG}") ]]; then
+    docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}"
     make release
 
-    if [ -n "$TRAVIS_TAG" ]; then
-      make release TAG="${WORDPRESS}-${PHP_VER}-${TRAVIS_TAG}"
+    if [[ -n "${TRAVIS_TAG}" ]]; then
+      make release TAG="${WP_VER}-${PHP_VER}-${TRAVIS_TAG}"
     fi
 
-    if [ "$WORDPRESS" == "$LATEST_WORDPRESS" && "$PHP_VER" == "$LATEST_PHP_VER" && $PHP_DEBUG != 1 ]; then
-      make release TAG=latest
+    if [[ "${WP_VER}" == "${LATEST_WP_VER}" && "${PHP_VER}" == "${LATEST_PHP_VER}" && "${PHP_DEBUG}" != 1 ]]; then
+      make release TAG="latest"
     fi
   fi

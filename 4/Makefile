@@ -1,9 +1,9 @@
 -include env_make
 
-WORDPRESS = 4
+WORDPRESS_VER = 4
 
 PHP_VER ?= 7.1
-TAG ?= $(WORDPRESS)-$(PHP_VER)
+TAG ?= $(WORDPRESS_VER)-$(PHP_VER)
 PHP_DEBUG ?= 0
 
 REPO = wodby/wordpress
