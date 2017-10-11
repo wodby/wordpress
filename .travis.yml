@@ -1,4 +1,4 @@
-language: python
+language: bash
 
 sudo: required
 
@@ -34,9 +34,7 @@ after_success: |
 
     if [[ -n "${TRAVIS_TAG}" ]]; then
       make release TAG="${WP_VER}-${PHP_VER}-${TRAVIS_TAG}"
-    fi
-
-    if [[ "${WP_VER}" == "${LATEST_WP_VER}" && "${PHP_VER}" == "${LATEST_PHP_VER}" && "${PHP_DEBUG}" != 1 ]]; then
+    elif [[ "${WP_VER}" == "${LATEST_WP_VER}" && "${PHP_VER}" == "${LATEST_PHP_VER}" && "${PHP_DEBUG}" == 0 ]]; then
       make release TAG="latest"
     fi
   fi
