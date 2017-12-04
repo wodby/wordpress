@@ -1,23 +1,33 @@
 -include env_make
 
-WORDPRESS = 4
+WORDPRESS_VER = 4
+PHP_VER ?= 7.2
 
-PHP_VER ?= 7.1
-TAG ?= $(WORDPRESS)-$(PHP_VER)
-PHP_DEBUG ?= 0
-
-REPO = wodby/wordpress
-NAME = wordpress-$(TAG)
 FROM_TAG = $(PHP_VER)
+REPO = wodby/wordpress
+NAME = wordpress-$(WORDPRESS_VER)-$(PHP_VER)
+
+ifeq ($(TAG),)
+    ifeq ($(PHP_DEV),)
+        TAG ?= $(WORDPRESS_VER)-$(PHP_VER)
+    else
+        TAG := $(WORDPRESS_VER)-$(PHP_VER)-dev
+    endif
+endif
+
+ifneq ($(PHP_DEV),)
+    NAME := $(NAME)-dev
+    FROM_TAG := $(FROM_TAG)-dev
+endif
 
 ifneq ($(FROM_STABILITY_TAG),)
     FROM_TAG := $(FROM_TAG)-$(FROM_STABILITY_TAG)
 endif
 
-ifeq ($(PHP_DEBUG), 1)
-    override TAG := $(TAG)-debug
-    FROM_TAG := $(FROM_TAG)-debug
-    NAME := $(NAME)-debug
+ifneq ($(STABILITY_TAG),)
+    ifneq ($(TAG),latest)
+        override TAG := $(TAG)-$(STABILITY_TAG)
+    endif
 endif
 
 .PHONY: build test push shell run start stop logs clean release
