@@ -9,7 +9,7 @@ env:
   global:
     - DOCKER_VERSION=17.06.2
     - LATEST_TAG=4-7.2
-    - FROM_STABILITY_TAG=3.3.0
+    - FROM_STABILITY_TAG=3.3.1
   matrix:
     - WORDPRESS=4 PHP_VER=7.2
     - WORDPRESS=4 PHP_VER=7.1
