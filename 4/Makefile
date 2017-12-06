@@ -61,5 +61,4 @@ logs:
 clean:
 	-docker rm -f $(NAME)
 
-release: build
-	make push -e TAG=$(TAG)
+release: build push
