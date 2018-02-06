@@ -14,9 +14,9 @@ RUN set -ex; \
 	su-exec www-data mkdir -p /usr/src/wordpress/wp-content/uploads; \
 	chmod 775 \
 	    /usr/src/wordpress/wp-config.php \
-	    /usr/src/wordpress/wp-content/; \
-	    /usr/src/wordpress/wp-content/uploads; \
-	    /usr/src/wordpress/wp-content/plugins; \
+	    /usr/src/wordpress/wp-content/ \
+	    /usr/src/wordpress/wp-content/uploads \
+	    /usr/src/wordpress/wp-content/plugins \
 	    /usr/src/wordpress/wp-content/themes; \
 	\
 	echo "$(cat /etc/sudoers.d/www-data), /usr/local/bin/init.sh" > /etc/sudoers.d/www-data
