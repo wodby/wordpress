@@ -16,5 +16,6 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
         sed -i "s/username_here/${DB_NAME:-wordpress}/" "${APP_ROOT}/wp-config.php"
         sed -i "s/password_here/${DB_NAME:-wordpress}/" "${APP_ROOT}/wp-config.php"
         sed -i "s/'DB_HOST', 'localhost'/'DB_HOST', '${DB_NAME:-mariadb}'/" "${APP_ROOT}/wp-config.php"
+        echo "define('FS_METHOD', 'direct');" >> "${APP_ROOT}/wp-config.php"
     fi
 fi
