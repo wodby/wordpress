@@ -4,9 +4,12 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
 [![Docker Layers](https://images.microbadger.com/badges/image/wodby/wordpress.svg)](https://microbadger.com/images/wodby/wordpress)
-[![Wodby Slack](http://slack.wodby.com/badge.svg)](http://slack.wodby.com)
 
 ## Docker Images
+
+!!! For better reliability we release images with stability tags (`wodby/wordpress:4-7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/wordpress/releases). We **STRONGLY RECOMMEND** using images only with stability tags. 
+
+Overview:
 
 * All images are based on Alpine Linux
 * Base image: [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
@@ -30,7 +33,11 @@ For better reliability we additionally release images with stability tags (`wodb
 
 ## Environment Variables
 
-See at [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
+See [wodby/wordpress-php](https://github.com/wodby/wordpress-php) for all variables.
+
+## Orchestration Actions
+
+See [wodby/wordpress-php](https://github.com/wodby/wordpress-php) for all actions.
 
 ## Complete WordPress Stack
 
