@@ -29,8 +29,6 @@ Overview:
 | `4-7.0-dev` [_(Dockerfile)_]                     | 4         | 7.0 |
 | `4-5.6-dev` [_(Dockerfile)_]                     | 4         | 5.6 |
 
-For better reliability we additionally release images with stability tags (`wodby/wordpress:4-7.1-X.X.X`) which correspond to [git tags](https://github.com/wodby/wordpress/releases). We **strongly recommend** using images only with stability tags. 
-
 ## Environment Variables
 
 See [wodby/wordpress-php](https://github.com/wodby/wordpress-php) for all variables.
