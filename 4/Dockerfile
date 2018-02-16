@@ -19,7 +19,9 @@ RUN set -ex; \
 	    /usr/src/wordpress/wp-content/plugins \
 	    /usr/src/wordpress/wp-content/themes; \
 	\
-	echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init.sh" > /etc/sudoers.d/wodby
+    if [[ -z "${PHP_DEV}" ]]; then \
+	    echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init" > /etc/sudoers.d/wodby
+	fi
 
 USER wodby
 
