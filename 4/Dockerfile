@@ -20,7 +20,7 @@ RUN set -ex; \
 	    /usr/src/wordpress/wp-content/themes; \
 	\
     if [[ -z "${PHP_DEV}" ]]; then \
-	    echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init" > /etc/sudoers.d/wodby
+	    echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init" > /etc/sudoers.d/wodby; \
 	fi
 
 USER wodby
