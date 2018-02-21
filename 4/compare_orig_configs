@@ -20,6 +20,9 @@ for index in "${array[@]}" ; do
     local="${index%%::*}"
     remote="${index##*::}"
 
+    cat "${local}"
+    echo "======"
+    wget -qO- "${remote}"
     md5_local=$(cat "${local}" | md5sum)
     md5_remote=$(wget -qO- "${remote}" | md5sum)
 
