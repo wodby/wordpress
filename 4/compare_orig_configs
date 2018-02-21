@@ -20,7 +20,7 @@ for index in "${array[@]}" ; do
     local="${index%%::*}"
     remote="${index##*::}"
 
-    wget -qO "${remote}" /orig/remote.php
+    wget -qO /orig/remote.php "${remote}"
     diff /orig/wp-config-sample.php /orig/remote.php
 
     md5_local=$(cat "${local}" | md5sum)
