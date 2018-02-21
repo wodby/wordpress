@@ -1,17 +1,19 @@
 -include env_make
 
-WORDPRESS_VER = 4
-PHP_VER ?= 7.2
+WP_VER ?= 4.9.4
+WP_VER_MAJOR ?= $(shell echo "${WP_VER}" | grep -oE '^[0-9]+')
 
+PHP_VER ?= 7.2
 BASE_IMAGE_TAG = $(PHP_VER)
+
 REPO = wodby/wordpress
-NAME = wordpress-$(WORDPRESS_VER)-$(PHP_VER)
+NAME = wordpress-$(WP_VER_MAJOR)-$(PHP_VER)
 
 ifeq ($(TAG),)
     ifeq ($(PHP_DEV),)
-        TAG ?= $(WORDPRESS_VER)-$(PHP_VER)
+        TAG ?= $(WP_VER_MAJOR)-$(PHP_VER)
     else
-        TAG := $(WORDPRESS_VER)-$(PHP_VER)-dev
+        TAG := $(WP_VER_MAJOR)-$(PHP_VER)-dev
     endif
 endif
 
@@ -35,7 +37,10 @@ endif
 default: build
 
 build:
-	docker build -t $(REPO):$(TAG) --build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) ./
+	docker build -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg WP_VER=$(WP_VER) \
+		./
 
 test:
 	IMAGE=$(REPO):$(TAG) ./test
@@ -60,5 +65,11 @@ logs:
 
 clean:
 	-docker rm -f $(NAME)
+
+compare-orig-configs:
+	docker run --rm \
+		-v $(PWD)/compare_orig_configs:/usr/local/bin/compare_orig_configs \
+		-v $(PWD)/orig:/orig \
+		wodby/alpine compare_orig_configs $(WP_VER)
 
 release: build push
