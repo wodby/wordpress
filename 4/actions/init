@@ -7,9 +7,9 @@ if [[ -n "${DEBUG}" ]]; then
 fi
 
 if [[ ! -f "${APP_ROOT}/index.php" ]]; then
-    echo >&2 "WordPress not found in ${APP_ROOT} - copying now..."
-    rsync -rltogp "/usr/src/wordpress/" "${APP_ROOT}/"
-    echo >&2 "Complete! WordPress has been successfully copied to ${APP_ROOT}"
+    echo "WordPress not found in ${APP_ROOT} - copying now..."
+    rsync -a "/usr/src/wordpress/" "${APP_ROOT}/"
+    echo "Complete! WordPress has been successfully copied to ${APP_ROOT}"
 
     if [[ -z "${WODBY_APP_NAME}" ]]; then
         su-exec wodby cp "${APP_ROOT}/wp-config-sample.php" "${APP_ROOT}/wp-config.php"
@@ -18,5 +18,16 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
         sed -i "s/password_here/${DB_NAME:-wordpress}/" "${APP_ROOT}/wp-config.php"
         sed -i "s/'DB_HOST', 'localhost'/'DB_HOST', '${DB_NAME:-mariadb}'/" "${APP_ROOT}/wp-config.php"
         echo "define('FS_METHOD', 'direct');" >> "${APP_ROOT}/wp-config.php"
+    fi
+else
+    latest_ver=$(wp core version)
+    current_ver=$(wp core version --path="${APP_ROOT}")
+
+    res=$(compare-semver.sh "${latest_ver}" "${current_ver}" ">")
+
+    if [[ "${res}" == 0 ]]; then
+        echo "Current version ${current_ver} is outdated, updating to ${latest_ver}..."
+        rsync -a "/usr/src/wordpress/" "${APP_ROOT}/"
+        echo "Complete! WordPress has been successfully updated to ${latest_ver}"
     fi
 fi
