@@ -21,12 +21,14 @@ RUN set -ex; \
 	chown :www-data \
         wp-content/ \
         wp-content/uploads \
+        wp-content/upgrade \
         wp-content/plugins \
         wp-content/themes; \
     \
 	chmod 775 \
 	    wp-content/ \
 	    wp-content/uploads \
+	    wp-content/upgrade \
 	    wp-content/plugins \
 	    wp-content/themes; \
 	\
