@@ -2,24 +2,40 @@ ARG BASE_IMAGE_TAG
 
 FROM wodby/wordpress-php:${BASE_IMAGE_TAG}
 
+ARG WP_VER
+
+ENV WP_VER="${WP_VER}" \
+    APP_NAME="WordPress 4"
+
 USER root
 
 RUN set -ex; \
     \
     mv /usr/local/bin/actions.mk /usr/local/bin/wordpress-php.mk; \
-    mkdir -p /usr/src/wordpress; \
-	chown -R wodby:wodby /usr/src/wordpress; \
-	su-exec wodby wp core download --path=/usr/src/wordpress; \
-	su-exec wodby cp /usr/src/wordpress/wp-config-sample.php /usr/src/wordpress/wp-config.php; \
-	su-exec wodby mkdir -p /usr/src/wordpress/wp-content/uploads; \
-	chmod 775 \
-	    /usr/src/wordpress/wp-config.php \
-	    /usr/src/wordpress/wp-content/ \
-	    /usr/src/wordpress/wp-content/uploads \
-	    /usr/src/wordpress/wp-content/plugins \
-	    /usr/src/wordpress/wp-content/themes; \
+    mkdir -p /usr/src/wordpress/; \
+	chown -R wodby:wodby /usr/src/wordpress/; \
+	cd /usr/src/wordpress/; \
+	su-exec wodby wp core download --version="${WP_VER}"; \
+	su-exec wodby mkdir -p wp-content/uploads; \
 	\
-	echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init.sh" > /etc/sudoers.d/wodby
+	chown :www-data \
+        wp-content/ \
+        wp-content/uploads \
+        wp-content/plugins \
+        wp-content/themes; \
+    \
+	chmod 775 \
+	    wp-content/ \
+	    wp-content/uploads \
+	    wp-content/plugins \
+	    wp-content/themes; \
+	\
+	find wp-content/plugins -type d -exec chown -R :www-data {} \; -exec chmod -R 775 {} \;; \
+	find wp-content/themes -type d -exec chown -R :www-data {} \; -exec chmod -R 775 {} \;; \
+	\
+    if [[ -z "${PHP_DEV}" ]]; then \
+	    echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init" > /etc/sudoers.d/wodby; \
+	fi
 
 USER wodby
 
