@@ -26,7 +26,7 @@ else
     res=$(compare-semver.sh "${latest_ver}" "${current_ver}" ">")
 
     if [[ "${res}" == 0 ]]; then
-        echo "Current version ${current_ver} is outdated, updating to ${latest_ver}..."
+        echo "Current version of WordPress is outdated (${current_ver}), updating to ${latest_ver}..."
         rsync -a "/usr/src/wordpress/" "${APP_ROOT}/"
         echo "Complete! WordPress has been successfully updated to ${latest_ver}"
     fi
