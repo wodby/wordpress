@@ -4,7 +4,8 @@ FROM wodby/wordpress-php:${BASE_IMAGE_TAG}
 
 ARG WP_VER
 
-ENV WP_VER="${WP_VER}"
+ENV WP_VER="${WP_VER}" \
+    APP_NAME="WordPress 4"
 
 USER root
 
