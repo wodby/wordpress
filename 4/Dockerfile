@@ -11,22 +11,26 @@ USER root
 RUN set -ex; \
     \
     mv /usr/local/bin/actions.mk /usr/local/bin/wordpress-php.mk; \
-    mkdir -p /usr/src/wordpress; \
-	chown -R wodby:wodby /usr/src/wordpress; \
-	su-exec wodby wp core download --version="${WP_VER}" --path=/usr/src/wordpress; \
-	su-exec wodby mkdir -p /usr/src/wordpress/wp-content/uploads; \
+    mkdir -p /usr/src/wordpress/; \
+	chown -R wodby:wodby /usr/src/wordpress/; \
+	cd /usr/src/wordpress/; \
+	su-exec wodby wp core download --version="${WP_VER}"; \
+	su-exec wodby mkdir -p wp-content/uploads; \
 	\
 	chown :www-data \
-        /usr/src/wordpress/wp-content/ \
-        /usr/src/wordpress/wp-content/uploads \
-        /usr/src/wordpress/wp-content/plugins \
-        /usr/src/wordpress/wp-content/themes; \
+        wp-content/ \
+        wp-content/uploads \
+        wp-content/plugins \
+        wp-content/themes; \
     \
 	chmod 775 \
-	    /usr/src/wordpress/wp-content/ \
-	    /usr/src/wordpress/wp-content/uploads \
-	    /usr/src/wordpress/wp-content/plugins \
-	    /usr/src/wordpress/wp-content/themes; \
+	    wp-content/ \
+	    wp-content/uploads \
+	    wp-content/plugins \
+	    wp-content/themes; \
+	\
+	find wp-content/plugins -type d -exec chown :www-data {} \; -exec chmod 775 {} \;; \
+	find wp-content/themes -type d -exec chown :www-data {} \; -exec chmod 775 {} \;; \
 	\
     if [[ -z "${PHP_DEV}" ]]; then \
 	    echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init" > /etc/sudoers.d/wodby; \
