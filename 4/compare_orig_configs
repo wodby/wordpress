@@ -25,7 +25,7 @@ for index in "${array[@]}" ; do
     md5_remote=$(wget -qO- "${remote}" | md5sum)
 
     echo "======================="
-    cmp /orig/wp-config-sample.php /orig/remote.php
+    diff /orig/wp-config-sample.php /orig/remote.php | cat -t
     echo "======================="
     echo $md5_local
     echo $md5_remote
