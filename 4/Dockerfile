@@ -30,8 +30,8 @@ RUN set -ex; \
 	    wp-content/plugins \
 	    wp-content/themes; \
 	\
-	find wp-content/plugins -type d -exec chown :www-data {} \; -exec chmod 775 {} \;; \
-	find wp-content/themes -type d -exec chown :www-data {} \; -exec chmod 775 {} \;; \
+	find wp-content/plugins -type d -exec chown -R :www-data {} \; -exec chmod -R 775 {} \;; \
+	find wp-content/themes -type d -exec chown -R :www-data {} \; -exec chmod -R 775 {} \;; \
 	\
     if [[ -z "${PHP_DEV}" ]]; then \
 	    echo "$(cat /etc/sudoers.d/wodby), /usr/local/bin/init" > /etc/sudoers.d/wodby; \
