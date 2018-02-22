@@ -25,7 +25,7 @@ for index in "${array[@]}" ; do
 
     echo "Checking ${local}"
 
-    if diff "${local}" "${orig}"; then
+    if diff --strip-trailing-cr "${local}" "${orig}"; then
         echo "OK"
     else
         echo "!!! OUTDATED"
