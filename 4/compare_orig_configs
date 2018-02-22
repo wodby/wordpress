@@ -18,10 +18,10 @@ outdated=0
 
 for index in "${array[@]}" ; do
     local="${index%%::*}"
-    remote="${index##*::}"
+    url="${index##*::}"
 
     orig="/tmp/${RANDOM}"
-    wget -qO "${orig}" "${remote}"
+    wget -qO "${orig}" "${url}"
 
     echo "Checking ${local}"
 
@@ -32,6 +32,8 @@ for index in "${array[@]}" ; do
         echo "${remote}"
         outdated=1
     fi
+
+    rm -f "${orig}"
 done
 
 [[ "${outdated}" == 0 ]] || exit 1
