@@ -20,7 +20,7 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
         echo "define('FS_METHOD', 'direct');" >> "${APP_ROOT}/wp-config.php"
     fi
 else
-    latest_ver=$(su-exec wodby wp core version)
+    latest_ver=$(su-exec wodby wp core version --path=/usr/src/wordpress)
     current_ver=$(su-exec wodby wp core version --path="${APP_ROOT}")
 
     res=$(compare-semver.sh "${latest_ver}" "${current_ver}" ">")
