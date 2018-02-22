@@ -67,9 +67,6 @@ clean:
 	-docker rm -f $(NAME)
 
 compare-orig-configs:
-	docker run --rm \
-		-v $(PWD)/compare_orig_configs:/usr/local/bin/compare_orig_configs \
-		-v $(PWD)/orig:/orig \
-		wodby/alpine compare_orig_configs $(WP_VER)
+	./compare_orig_configs $(WP_VER)
 
 release: build push

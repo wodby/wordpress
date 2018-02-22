@@ -6,24 +6,30 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-apk add --update diffutils
-
 wp_ver=$1
 
 url="https://raw.githubusercontent.com/WordPress/WordPress/${wp_ver}/wp-config-sample.php"
 
 array=(
-    "/orig/wp-config-sample.php::${url}"
+    "./orig/wp-config-sample.php::${url}"
 )
 
 outdated=0
+
+get_md5() {
+    if hash md5sum 2>/dev/null; then
+        md5sum "$@"
+    else
+        md5 "$@"
+    fi
+}
 
 for index in "${array[@]}" ; do
     local="${index%%::*}"
     remote="${index##*::}"
 
-    md5_local=$(cat "${local}" | md5sum)
-    md5_remote=$(wget -qO- "${remote}" | md5sum)
+    md5_local=$(cat "${local}" | get_md5)
+    md5_remote=$(wget -qO- "${remote}" | get_md5)
 
     echo "Checking ${local}"
 
@@ -34,15 +40,6 @@ for index in "${array[@]}" ; do
     else
         echo "OK"
     fi
-
-
-    wget -qO /orig/remote.php "https://raw.githubusercontent.com/WordPress/WordPress/4.9.4/wp-config-sample.php"
-
-    echo "======================="
-    diff /orig/wp-config-sample.php /orig/remote.php | cat -t
-    echo "======================="
-    echo $md5_local
-    echo $md5_remote
 done
 
 [[ "${outdated}" == 0 ]] || exit 1
