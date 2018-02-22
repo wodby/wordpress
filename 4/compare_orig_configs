@@ -16,29 +16,21 @@ array=(
 
 outdated=0
 
-get_md5() {
-    if hash md5sum 2>/dev/null; then
-        md5sum "$@"
-    else
-        md5 "$@"
-    fi
-}
-
 for index in "${array[@]}" ; do
     local="${index%%::*}"
     remote="${index##*::}"
 
-    md5_local=$(cat "${local}" | get_md5)
-    md5_remote=$(wget -qO- "${remote}" | get_md5)
+    orig="/tmp/${RANDOM}"
+    wget -qO "${orig}" "${remote}"
 
     echo "Checking ${local}"
 
-    if [[ "${md5_local}" != "${md5_remote}" ]]; then
+    if diff "${local}" "${orig}"; then
+        echo "OK"
+    else
         echo "!!! OUTDATED"
         echo "${remote}"
         outdated=1
-    else
-        echo "OK"
     fi
 done
 
