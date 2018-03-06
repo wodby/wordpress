@@ -12,10 +12,6 @@ env:
     - TAG=4-7.1 WP_VER="${WP4}" PHP_VER=7.1
     - TAG=4-7.0 WP_VER="${WP4}" PHP_VER=7.0
     - TAG=4-5.6 WP_VER="${WP4}" PHP_VER=5.6
-    - TAG=4-7.2-dev WP_VER="${WP4}" PHP_VER=7.2 PHP_DEV=1
-    - TAG=4-7.1-dev WP_VER="${WP4}" PHP_VER=7.1 PHP_DEV=1
-    - TAG=4-7.0-dev WP_VER="${WP4}" PHP_VER=7.0 PHP_DEV=1
-    - TAG=4-5.6-dev WP_VER="${WP4}" PHP_VER=5.6 PHP_DEV=1
 
 script:
   - set -e

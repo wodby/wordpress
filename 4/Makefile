@@ -9,18 +9,7 @@ BASE_IMAGE_TAG = $(PHP_VER)
 REPO = wodby/wordpress
 NAME = wordpress-$(WP_VER_MAJOR)-$(PHP_VER)
 
-ifeq ($(TAG),)
-    ifeq ($(PHP_DEV),)
-        TAG ?= $(WP_VER_MAJOR)-$(PHP_VER)
-    else
-        TAG := $(WP_VER_MAJOR)-$(PHP_VER)-dev
-    endif
-endif
-
-ifneq ($(PHP_DEV),)
-    NAME := $(NAME)-dev
-    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-dev
-endif
+TAG ?= $(WP_VER_MAJOR)-$(PHP_VER)
 
 ifneq ($(BASE_IMAGE_STABILITY_TAG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
