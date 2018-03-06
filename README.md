@@ -24,10 +24,6 @@ Overview:
 | `4-7.1` [_(Dockerfile)_]                         | 4         | 7.1 |
 | `4-7.0` [_(Dockerfile)_]                         | 4         | 7.0 |
 | `4-5.6` [_(Dockerfile)_]                         | 4         | 5.6 |
-| `4-7.2-dev` [_(Dockerfile)_]                     | 4         | 7.2 |
-| `4-7.1-dev` [_(Dockerfile)_]                     | 4         | 7.1 |
-| `4-7.0-dev` [_(Dockerfile)_]                     | 4         | 7.0 |
-| `4-5.6-dev` [_(Dockerfile)_]                     | 4         | 5.6 |
 
 ## Environment Variables
 
