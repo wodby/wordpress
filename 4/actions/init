@@ -17,9 +17,9 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
     if [[ -z "${WODBY_APP_NAME}" ]]; then
         su-exec wodby cp "${APP_ROOT}/wp-config-sample.php" "${APP_ROOT}/wp-config.php"
         sed -i "s/database_name_here/${DB_NAME:-wordpress}/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/username_here/${DB_NAME:-wordpress}/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/password_here/${DB_NAME:-wordpress}/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'DB_HOST', 'localhost'/'DB_HOST', '${DB_NAME:-mariadb}'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/username_here/${DB_USER:-wordpress}/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/password_here/${DB_PASSWORD:-wordpress}/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'DB_HOST', 'localhost'/'DB_HOST', '${DB_HOST:-mariadb}'/" "${APP_ROOT}/wp-config.php"
         echo "define('FS_METHOD', 'direct');" >> "${APP_ROOT}/wp-config.php"
     fi
 else
