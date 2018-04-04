@@ -6,7 +6,7 @@ services:
 env:
   global:
     - LATEST_TAG=4-7.2
-    - WP4=4.9.4
+    - WP4=4.9.5
   matrix:
     - TAG=4-7.2 WP_VER="${WP4}" PHP_VER=7.2
     - TAG=4-7.1 WP_VER="${WP4}" PHP_VER=7.1
