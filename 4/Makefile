@@ -32,7 +32,7 @@ build:
 		./
 
 test:
-	IMAGE=$(REPO):$(TAG) ./test
+	IMAGE=$(REPO):$(TAG) ./test.sh
 
 push:
 	docker push $(REPO):$(TAG)
@@ -55,7 +55,7 @@ logs:
 clean:
 	-docker rm -f $(NAME)
 
-compare-orig-configs:
-	./compare_orig_configs $(WP_VER)
+check-configs:
+	./check_configs.sh $(WP_VER)
 
 release: build push
