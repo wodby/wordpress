@@ -8,14 +8,14 @@ env:
     - LATEST_TAG=4-7.2
     - BASE_IMAGE_STABILITY_TAG=4.4.0
   matrix:
-    - TAG=4-7.2 WP=4 PHP_VER=7.2 EXTRA_TAG=4
-    - TAG=4-7.1 WP=4 PHP_VER=7.1
-    - TAG=4-7.0 WP=4 PHP_VER=7.0
-    - TAG=4-5.6 WP=4 PHP_VER=5.6
+    - TAG=4-7.2 WORDPRESS=4 PHP_VER=7.2 EXTRA_TAG=4
+    - TAG=4-7.1 WORDPRESS=4 PHP_VER=7.1
+    - TAG=4-7.0 WORDPRESS=4 PHP_VER=7.0
+    - TAG=4-5.6 WORDPRESS=4 PHP_VER=5.6
 
 script:
   - set -e
-  - cd "${WP4}"
+  - cd "${WORDPRESS}"
   - make check-configs
   - make
   - make test
