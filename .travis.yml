@@ -16,9 +16,9 @@ env:
 script:
   - set -e
   - cd ./"${WP_VER:0:1}"
-  - make compare-orig-configs
+  - make check-configs
   - make
   - make test
 
 after_success:
-  - . "${TRAVIS_BUILD_DIR}/travis_release"
+  - . "${TRAVIS_BUILD_DIR}/release.sh"
