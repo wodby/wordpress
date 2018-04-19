@@ -56,6 +56,6 @@ clean:
 	-docker rm -f $(NAME)
 
 check-configs:
-	./check_configs.sh $(WP_VER)
+	./check-configs.sh $(WP_VER)
 
 release: build push
