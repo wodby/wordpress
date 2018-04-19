@@ -9,14 +9,14 @@ env:
     - WP4=4.9.5
     - BASE_IMAGE_STABILITY_TAG=4.2.6
   matrix:
-    - TAG=4-7.2 WP_VER="${WP4}" PHP_VER=7.2
-    - TAG=4-7.1 WP_VER="${WP4}" PHP_VER=7.1
-    - TAG=4-7.0 WP_VER="${WP4}" PHP_VER=7.0
-    - TAG=4-5.6 WP_VER="${WP4}" PHP_VER=5.6
+    - TAG=4-7.2 WP=4 PHP_VER=7.2 EXTRA_TAG=4
+    - TAG=4-7.1 WP=4 PHP_VER=7.1
+    - TAG=4-7.0 WP=4 PHP_VER=7.0
+    - TAG=4-5.6 WP=4 PHP_VER=5.6
 
 script:
   - set -e
-  - cd ./"${WP_VER:0:1}"
+  - cd "${WP4}"
   - make check-configs
   - make
   - make test
