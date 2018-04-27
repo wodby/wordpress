@@ -6,7 +6,7 @@ services:
 env:
   global:
     - LATEST_TAG=4-7.2
-    - BASE_IMAGE_STABILITY_TAG=4.4.1
+    - BASE_IMAGE_STABILITY_TAG=4.4.2
   matrix:
     - TAG=4-7.2 WORDPRESS=4 PHP_VER=7.2 EXTRA_TAG=4
     - TAG=4-7.1 WORDPRESS=4 PHP_VER=7.1
