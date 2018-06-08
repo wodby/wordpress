@@ -1,6 +1,6 @@
 -include env_make
 
-WP_VER ?= 4.9.5
+WP_VER ?= 4.9.6
 WP_VER_MAJOR ?= $(shell echo "${WP_VER}" | grep -oE '^[0-9]+')
 
 PHP_VER ?= 7.2
