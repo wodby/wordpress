@@ -4,13 +4,11 @@ services:
   - docker
 
 env:
-  global:
-    - LATEST_TAG=4-7.2
   matrix:
-    - TAG=4-7.2 WORDPRESS=4 PHP_VER=7.2 EXTRA_TAG=4
-    - TAG=4-7.1 WORDPRESS=4 PHP_VER=7.1
-    - TAG=4-7.0 WORDPRESS=4 PHP_VER=7.0
-    - TAG=4-5.6 WORDPRESS=4 PHP_VER=5.6
+    - WORDPRESS=4 PHP_VER=7.2 TAGS=4-7.2,4,latest
+    - WORDPRESS=4 PHP_VER=7.1 TAGS=4-7.1
+    - WORDPRESS=4 PHP_VER=7.0 TAGS=4-7.0
+    - WORDPRESS=4 PHP_VER=5.6 TAGS=4-5.6
 
 script:
   - set -e
