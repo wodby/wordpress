@@ -20,7 +20,7 @@ Overview:
 
 | Supported tags and respective `Dockerfile` links | WordPress | PHP |
 | ------------------------------------------------ | --------- | --- |
-| `4`, `4-7.2`, `latest` [_(Dockerfile)_]          | 4         | 7.2 |
+| `4-7.2`, `4`, `latest` [_(Dockerfile)_]          | 4         | 7.2 |
 | `4-7.1` [_(Dockerfile)_]                         | 4         | 7.1 |
 | `4-7.0` [_(Dockerfile)_]                         | 4         | 7.0 |
 | `4-5.6` [_(Dockerfile)_]                         | 4         | 5.6 |
