@@ -8,7 +8,7 @@ fi
 
 wp_ver=$1
 
-url="https://raw.githubusercontent.com/WordPress/WordPress/${wp_ver}/wp-config-sample.php"
+url="https://build.trac.wordpress.org/browser/tags/${wp_ver}/wp-config-sample.php?format=txt"
 
 array=(
     "./orig/wp-config-sample.php::${url}"
