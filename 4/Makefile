@@ -1,6 +1,9 @@
 -include env_make
 
 WP_VER ?= 4.9.8
+WP_SHA1 ?= 0945bab959cba127531dceb2c4fed81770812b4f
+WP_MD5 ?= c4e7d68b5c382fbbaf547f2b2d42c198
+
 WP_VER_MAJOR ?= $(shell echo "${WP_VER}" | grep -oE '^[0-9]+')
 
 PHP_VER ?= 7.2
@@ -29,6 +32,8 @@ build:
 	docker build -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg WP_VER=$(WP_VER) \
+		--build-arg WP_SHA1=$(WP_SHA1) \
+		--build-arg WP_MD5=$(WP_MD5) \
 		./
 
 test:
