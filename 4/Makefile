@@ -1,18 +1,18 @@
 -include env_make
 
-WP_VER ?= 4.9.8
-WP_SHA1 ?= 0945bab959cba127531dceb2c4fed81770812b4f
-WP_MD5 ?= c4e7d68b5c382fbbaf547f2b2d42c198
+WORDPRESS_VER ?= 4.9.8
+WORDPRESS_SHA1 ?= 0945bab959cba127531dceb2c4fed81770812b4f
+WORDPRESS_MD5 ?= c4e7d68b5c382fbbaf547f2b2d42c198
 
-WP_VER_MAJOR ?= $(shell echo "${WP_VER}" | grep -oE '^[0-9]+')
+WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
 
 PHP_VER ?= 7.2
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/wordpress
-NAME = wordpress-$(WP_VER_MAJOR)-$(PHP_VER)
+NAME = wordpress-$(WORDPRESS_VER_MAJOR)-$(PHP_VER)
 
-TAG ?= $(WP_VER_MAJOR)-$(PHP_VER)
+TAG ?= $(WORDPRESS_VER_MAJOR)-$(PHP_VER)
 
 ifneq ($(BASE_IMAGE_STABILITY_TAG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
@@ -31,9 +31,9 @@ default: build
 build:
 	docker build -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
-		--build-arg WP_VER=$(WP_VER) \
-		--build-arg WP_SHA1=$(WP_SHA1) \
-		--build-arg WP_MD5=$(WP_MD5) \
+		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
+		--build-arg WORDPRESS_SHA1=$(WORDPRESS_SHA1) \
+		--build-arg WORDPRESS_MD5=$(WORDPRESS_MD5) \
 		./
 
 test:
@@ -61,6 +61,6 @@ clean:
 	-docker rm -f $(NAME)
 
 check-configs:
-	./check-configs.sh $(WP_VER)
+	./check-configs.sh $(WORDPRESS_VER)
 
 release: build push
