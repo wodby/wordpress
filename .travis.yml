@@ -4,15 +4,17 @@ services:
   - docker
 
 env:
+  global:
+    - WORDPRESS4=4.9.8
   matrix:
-    - WORDPRESS=4 PHP_VER=7.2 TAGS=4-7.2,4,latest
-    - WORDPRESS=4 PHP_VER=7.1 TAGS=4-7.1
-    - WORDPRESS=4 PHP_VER=7.0 TAGS=4-7.0
-    - WORDPRESS=4 PHP_VER=5.6 TAGS=4-5.6
+    - WORDPRESS_VER="${WORDPRESS4}" PHP_VER=7.2 TAGS=4-7.2,4,latest
+    - WORDPRESS_VER="${WORDPRESS4}" PHP_VER=7.1 TAGS=4-7.1
+    - WORDPRESS_VER="${WORDPRESS4}" PHP_VER=7.0 TAGS=4-7.0
+    - WORDPRESS_VER="${WORDPRESS4}" PHP_VER=5.6 TAGS=4-5.6
 
 script:
   - set -e
-  - cd "${WORDPRESS}"
+  - cd "${WORDPRESS_VER%%.*}"
   - make check-configs
   - make
   - make test
