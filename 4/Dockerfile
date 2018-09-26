@@ -3,8 +3,6 @@ ARG BASE_IMAGE_TAG
 FROM wodby/wordpress-php:${BASE_IMAGE_TAG}
 
 ARG WORDPRESS_VER
-ARG WORDPRESS_SHA1
-ARG WORDPRESS_MD5
 
 ENV WP_VER="${WORDPRESS_VER}" \
     APP_NAME="WordPress 4"
@@ -19,8 +17,6 @@ RUN set -ex; \
 	\
 	cd /tmp; \
 	wget -O wp.tar.gz "https://wordpress.org/wordpress-${WORDPRESS_VER}.tar.gz"; \
-	echo "$WORDPRESS_SHA1 *wp.tar.gz" | sha1sum -c -; \
-	echo "$WORDPRESS_MD5 *wp.tar.gz" | md5sum -c -; \
     su-exec wodby tar zxf /tmp/wp.tar.gz --no-same-owner --strip-components=1 -C /usr/src/wordpress; \
     rm -rf /tmp/wp.tar.gz; \
     \
