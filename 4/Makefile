@@ -1,8 +1,6 @@
 -include env_make
 
 WORDPRESS_VER ?= 4.9.8
-WORDPRESS_SHA1 ?= 0945bab959cba127531dceb2c4fed81770812b4f
-WORDPRESS_MD5 ?= c4e7d68b5c382fbbaf547f2b2d42c198
 
 WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
 
