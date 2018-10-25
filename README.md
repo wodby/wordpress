@@ -20,9 +20,9 @@ Overview:
 
 | Supported tags and respective `Dockerfile` links | WordPress | PHP |
 | ------------------------------------------------ | --------- | --- |
-| `4-7.2`, `4`, `latest` [_(Dockerfile)_]          | 4         | 7.2 |
+| `4-7.2`, `4-7`, `4`, `latest` [_(Dockerfile)_]   | 4         | 7.2 |
 | `4-7.1` [_(Dockerfile)_]                         | 4         | 7.1 |
-| `4-5.6` [_(Dockerfile)_]                         | 4         | 5.6 |
+| `4-5.6`, `4-5` [_(Dockerfile)_]                  | 4         | 5.6 |
 
 ## Environment Variables
 
