@@ -12,8 +12,17 @@ NAME = wordpress-$(WORDPRESS_VER_MAJOR)-$(PHP_VER)
 
 TAG ?= $(WORDPRESS_VER_MAJOR)-$(PHP_VER)
 
+ifneq ($(PHP_DEBUG),)
+    TAG := $(TAG)-debug
+endif
+
 ifneq ($(BASE_IMAGE_STABILITY_TAG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
+endif
+
+ifneq ($(PHP_DEBUG),)
+    NAME := $(NAME)-debug
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-debug
 endif
 
 ifneq ($(STABILITY_TAG),)
@@ -30,8 +39,6 @@ build:
 	docker build -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
-		--build-arg WORDPRESS_SHA1=$(WORDPRESS_SHA1) \
-		--build-arg WORDPRESS_MD5=$(WORDPRESS_MD5) \
 		./
 
 test:
