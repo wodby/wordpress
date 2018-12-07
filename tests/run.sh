@@ -13,5 +13,5 @@ trap "docker rm -vf ${cid} > /dev/null" EXIT
 
 docker exec "${cid}" make init -f /usr/local/bin/actions.mk
 echo -n "Checking WordPress version... "
-docker exec "${cid}" wp core version | grep -q '4.*'
+docker exec "${cid}" wp core version | grep -q "${WORDPRESS_VER}"
 echo "OK"
