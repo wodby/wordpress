@@ -1,10 +1,10 @@
 -include env_make
 
-WORDPRESS_VER ?= 4.9.8
+WORDPRESS_VER ?= 5.0
 
 WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
 
-PHP_VER ?= 7.2
+PHP_VER ?= 7.3
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/wordpress
@@ -42,7 +42,7 @@ build:
 		./
 
 test:
-	cd ./tests && IMAGE=$(REPO):$(TAG) ./run.sh
+	cd ./tests && IMAGE=$(REPO):$(TAG) WORDPRESS_VER=$(WORDPRESS_VER) ./run.sh
 
 push:
 	docker push $(REPO):$(TAG)
