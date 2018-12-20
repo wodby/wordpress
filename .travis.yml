@@ -5,7 +5,7 @@ services:
 
 env:
   global:
-    - WORDPRESS5=5.0.1
+    - WORDPRESS5=5.0.2
   matrix:
     - WORDPRESS_VER="${WORDPRESS5}" PHP_VER=7.3 TAGS=5-7.3,5-7,5,latest
     - WORDPRESS_VER="${WORDPRESS5}" PHP_VER=7.2 TAGS=5-7.2
