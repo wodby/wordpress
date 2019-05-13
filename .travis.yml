@@ -5,7 +5,7 @@ services:
 
 env:
   global:
-  - BASE_IMAGE_STABILITY_TAG=4.12.9
+  - BASE_IMAGE_STABILITY_TAG=4.12.10
   - GIT_MERGE_SEPARATOR_DUMMY_ENV_VAR=1
   - WORDPRESS5=5.2
   matrix:
