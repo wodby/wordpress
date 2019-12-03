@@ -5,7 +5,7 @@ FROM wodby/wordpress-php:${BASE_IMAGE_TAG}
 ARG WORDPRESS_VER
 
 ENV WP_VER="${WORDPRESS_VER}" \
-    APP_NAME="WordPress 4"
+    APP_NAME="WordPress 5"
 
 USER root
 
