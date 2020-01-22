@@ -7,7 +7,7 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/wordpress:7.4-X.X.X`) which correspond to [git tags](https://github.com/wodby/wordpress/releases). We strongly recommend using images only with stability tags. 
+❗For better reliability we release images with stability tags (`wodby/wordpress:5-X.X.X`) which correspond to [git tags](https://github.com/wodby/wordpress/releases). We strongly recommend using images only with stability tags. 
 
 Overview:
 
@@ -23,8 +23,6 @@ Overview:
 | `5-7.4`, `5-7`, `5`, `latest` [_(Dockerfile)_]   | 5         | 7.4 |
 | `5-7.3` [_(Dockerfile)_]                         | 5         | 7.3 |
 | `5-7.2` [_(Dockerfile)_]                         | 5         | 7.2 |
-| `5-7.1` [_(Dockerfile)_]                         | 5         | 7.1 |
-| `5-5.6`, `5-5` [_(Dockerfile)_]                  | 5         | 5.6 |
 
 ## Environment Variables
 
