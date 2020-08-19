@@ -8,6 +8,14 @@ fi
 
 src_dir="/usr/src/wordpress"
 
+# Generate keys & salts
+function generate_salt {
+    # Generate random 60 character random string including a subset of special characters
+    # Not including " or ' for output sanitization
+    local NEW_SALT=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9~`!@#$%^&*()_-=+[{]}\|:;,<>/?' | fold -w 60 | head -n 1)
+    echo "$NEW_SALT"
+}
+
 if [[ ! -f "${APP_ROOT}/index.php" ]]; then
     echo "${APP_NAME} not found in ${APP_ROOT} - copying now..."
     rsync -a "${src_dir}/" "${APP_ROOT}/"
@@ -22,6 +30,16 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
         sed -i "s/'DB_HOST', 'localhost'/'DB_HOST', '${DB_HOST:-mariadb}'/" "${APP_ROOT}/wp-config.php"
         sed -i "s/'DB_CHARSET', 'utf8'/'DB_CHARSET', '${DB_CHARSET:-utf8}'/" "${APP_ROOT}/wp-config.php"
         echo "define('FS_METHOD', 'direct');" >> "${APP_ROOT}/wp-config.php"
+        # WordPress Authentication Unique Keys and Salts.
+        # If .env variables are not available keys & salts are auto-generated
+        sed -i "s/'AUTH_KEY',.*'/'AUTH_KEY', '$(echo ${WP_AUTH_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'SECURE_AUTH_KEY',.*'/'SECURE_AUTH_KEY', '$(echo ${WP_SECURE_AUTH_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'LOGGED_IN_KEY',.*'/'LOGGED_IN_KEY', '$(echo ${WP_LOGGED_IN_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'NONCE_KEY',.*'/'NONCE_KEY', '$(echo ${WP_NONCE_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'AUTH_SALT',.*'/'AUTH_SALT', '$(echo ${WP_AUTH_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'SECURE_AUTH_SALT',.*'/'SECURE_AUTH_SALT', '$(echo ${WP_SECURE_AUTH_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'LOGGED_IN_SALT',.*'/'LOGGED_IN_SALT', '$(echo ${WP_LOGGED_IN_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'NONCE_SALT',.*'/'NONCE_SALT', '$(echo ${WP_NONCE_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
     fi
 else
     latest_ver=$(su-exec wodby wp core version --path="${src_dir}")
