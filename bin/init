@@ -29,7 +29,12 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
         sed -i "s/password_here/${DB_PASSWORD:-wordpress}/" "${APP_ROOT}/wp-config.php"
         sed -i "s/'DB_HOST', 'localhost'/'DB_HOST', '${DB_HOST:-mariadb}'/" "${APP_ROOT}/wp-config.php"
         sed -i "s/'DB_CHARSET', 'utf8'/'DB_CHARSET', '${DB_CHARSET:-utf8}'/" "${APP_ROOT}/wp-config.php"
-        echo "define('FS_METHOD', 'direct');" >> "${APP_ROOT}/wp-config.php"
+        # Set the WordPress Filesystem Method (see: https://wordpress.org/support/article/editing-wp-config-php/#wordpress-upgrade-constants)
+        # Accepted values are 'direct', 'ssh2', 'ftpext', 'ftpsockets', or 'false' to omit the constant and let WordPress decide.
+        # Defaults to `define('FS_METHOD', 'direct')` if not FS_METHOD is not specified in .env.
+        if [[ "${FS_METHOD}" != false ]]; then
+            echo "define('FS_METHOD', '${FS_METHOD:-direct}');" >> "${APP_ROOT}/wp-config.php"
+        fi
         # WordPress Authentication Unique Keys and Salts.
         # If .env variables are not available keys & salts are auto-generated
         sed -i "s/'AUTH_KEY',.*'/'AUTH_KEY', '$(echo ${WP_AUTH_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
