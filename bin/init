@@ -12,7 +12,7 @@ src_dir="/usr/src/wordpress"
 function generate_salt {
     # Generate random 60 character random string including a subset of special characters
     # Not including " or ' for output sanitization
-    local NEW_SALT=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9~`!@#$%^&*()_-=+[{]}\|:;,<>/?' | fold -w 60 | head -n 1)
+    local NEW_SALT=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9~!@#$%^&*()_-=+[{]}\|:;,<>/?' | fold -w 60 | head -n 1)
     echo "$NEW_SALT"
 }
 
