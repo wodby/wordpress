@@ -1,6 +1,6 @@
 # Vanilla WordPress Docker Container Image
 
-[![Build Status](https://travis-ci.org/wodby/wordpress.svg?branch=master)](https://travis-ci.org/wodby/wordpress)
+[![Build Status](https://github.com/wodby/wordpress/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/wordpress/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
 [![Docker Layers](https://images.microbadger.com/badges/image/wodby/wordpress.svg)](https://microbadger.com/images/wodby/wordpress)
@@ -11,10 +11,10 @@
 
 Overview:
 
-* All images are based on Alpine Linux
-* Base image: [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
-* [Travis CI builds](https://travis-ci.org/wodby/wordpress) 
-* [Docker Hub](https://hub.docker.com/r/wodby/wordpress)
+- All images based on Alpine Linux
+- Base image: [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
+- [GitHub actions builds](https://github.com/wodby/wordpress/actions) 
+- [Docker Hub](https://hub.docker.com/r/wodby/wordpress)
 
 [_(Dockerfile)_]: https://github.com/wodby/wordpress/tree/master/4/Dockerfile
 
