@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  WORDPRESS5: 5.5.3
+  WORDPRESS5: 5.6
 
 
   # skip a few lines to avoid conflicts.
