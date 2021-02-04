@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  WORDPRESS5: '5.6'
+  WORDPRESS5: '5.6.1
 
 jobs:
   wordpress-5-80:
