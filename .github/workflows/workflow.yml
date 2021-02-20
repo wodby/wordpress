@@ -44,12 +44,3 @@ jobs:
         version: ${{ env.WORDPRESS5 }}
         php_ver: '7.3'
         tags: 5-7.3
-  wordpress-5-72:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.WORDPRESS5 }}
-        php_ver: '7.2'
-        tags: 5-7.2
