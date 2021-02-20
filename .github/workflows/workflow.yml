@@ -13,6 +13,8 @@ on:
 
 env:
   WORDPRESS5: 5.6.1
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   wordpress-5-80:
@@ -24,8 +26,6 @@ jobs:
         version: ${{ env.WORDPRESS5 }}
         php_ver: '8.0'
         tags: 5-8.0,5-8,5,latest
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   wordpress-5-74:
     runs-on: ubuntu-latest
     steps:
@@ -35,8 +35,6 @@ jobs:
         version: ${{ env.WORDPRESS5 }}
         php_ver: '7.4'
         tags: 5-7.4,5-7
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   wordpress-5-73:
     runs-on: ubuntu-latest
     steps:
@@ -46,8 +44,6 @@ jobs:
         version: ${{ env.WORDPRESS5 }}
         php_ver: '7.3'
         tags: 5-7.3
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
   wordpress-5-72:
     runs-on: ubuntu-latest
     steps:
@@ -57,5 +53,3 @@ jobs:
         version: ${{ env.WORDPRESS5 }}
         php_ver: '7.2'
         tags: 5-7.2
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
