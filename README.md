@@ -23,7 +23,6 @@ Overview:
 | `5-8.0`, `5-8`, `5`, `latest` [_(Dockerfile)_]   | 5         | 8.0 |
 | `5-7.4`, `5-7`                [_(Dockerfile)_]   | 5         | 7.4 |
 | `5-7.3` [_(Dockerfile)_]                         | 5         | 7.3 |
-| `5-7.2` [_(Dockerfile)_]                         | 5         | 7.2 |
 
 ## Environment Variables
 
