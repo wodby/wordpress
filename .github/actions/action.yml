@@ -10,6 +10,10 @@ inputs:
   tags:
     description: image tags
     required: true
+  platform:
+    description: docker platform
+    required: false
+    default: linux/amd64
 runs:
   using: "composite"
   steps:
@@ -18,9 +22,11 @@ runs:
       WORDPRESS_VER: ${{ inputs.version }}
       PHP_VER: ${{ inputs.php_ver }}
       TAGS: ${{ inputs.tags }}
+      PLATFORM: ${{ inputs.platform }}
     run: |
       set -e
+      make buildx-build-amd64
       make
-      make test
+      make buildx-build
       . $GITHUB_ACTION_PATH/release.sh
     shell: bash

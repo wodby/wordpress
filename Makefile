@@ -1,6 +1,6 @@
 -include env_make
 
-WORDPRESS_VER ?= 5.6.1
+WORDPRESS_VER ?= 5.6.2
 
 WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
 
@@ -11,6 +11,8 @@ REPO = wodby/wordpress
 NAME = wordpress-$(WORDPRESS_VER_MAJOR)-$(PHP_VER)
 
 TAG ?= $(WORDPRESS_VER_MAJOR)-$(PHP_VER)
+
+PLATFORM ?= linux/amd64
 
 ifneq ($(PHP_DEBUG),)
     TAG := $(TAG)-debug
@@ -31,12 +33,33 @@ ifneq ($(STABILITY_TAG),)
     endif
 endif
 
-.PHONY: build test push shell run start stop logs clean release
+.PHONY: build buildx-build buildx-build-amd64 buildx-push test push shell run start stop logs clean release
 
 default: build
 
 build:
 	docker build -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
+		./
+
+# --load doesn't work with multiple platforms https://github.com/docker/buildx/issues/59
+# we need to save cache to run tests first.
+buildx-build-amd64:
+	docker build --platform linux/amd64 -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
+		--load \
+		./
+
+buildx-build:
+	docker build --platform $(PLATFORM) -t $(REPO):$(TAG) \
+		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
+		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
+		./
+
+buildx-push:
+	docker build --platform $(PLATFORM) --push -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
 		./

@@ -24,6 +24,8 @@ Overview:
 | `5-7.4`, `5-7`                [_(Dockerfile)_]   | 5         | 7.4 |
 | `5-7.3` [_(Dockerfile)_]                         | 5         | 7.3 |
 
+All images built for `linux/amd64` and `linux/arm64`
+
 ## Environment Variables
 
 See [wodby/wordpress-php](https://github.com/wodby/wordpress-php) for all variables.
