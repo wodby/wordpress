@@ -46,20 +46,20 @@ build:
 # --load doesn't work with multiple platforms https://github.com/docker/buildx/issues/59
 # we need to save cache to run tests first.
 buildx-build-amd64:
-	docker build --platform linux/amd64 -t $(REPO):$(TAG) \
+	docker buildx build --platform linux/amd64 -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
 		--load \
 		./
 
 buildx-build:
-	docker build --platform $(PLATFORM) -t $(REPO):$(TAG) \
+	docker buildx build --platform $(PLATFORM) -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
 		./
 
 buildx-push:
-	docker build --platform $(PLATFORM) --push -t $(REPO):$(TAG) \
+	docker buildx build --platform $(PLATFORM) --push -t $(REPO):$(TAG) \
 		--build-arg BASE_IMAGE_TAG=$(BASE_IMAGE_TAG) \
 		--build-arg WORDPRESS_VER=$(WORDPRESS_VER) \
 		./
