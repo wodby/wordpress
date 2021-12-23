@@ -19,8 +19,9 @@ Overview:
 [_(Dockerfile)_]: https://github.com/wodby/wordpress/tree/master/4/Dockerfile
 
 | Supported tags and respective `Dockerfile` links | WordPress | PHP |
-| ------------------------------------------------ | --------- | --- |
-| `5-8.0`, `5-8`, `5`, `latest` [_(Dockerfile)_]   | 5         | 8.0 |
+|--------------------------------------------------|-----------|-----|
+| `5-8.1`, `5-8`, `5`, `latest` [_(Dockerfile)_]   | 5         | 8.1 |
+| `5-8.0` [_(Dockerfile)_]                         | 5         | 8.0 |
 | `5-7.4`, `5-7`                [_(Dockerfile)_]   | 5         | 7.4 |
 | `5-7.3` [_(Dockerfile)_]                         | 5         | 7.3 |
 
