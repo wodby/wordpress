@@ -1,6 +1,6 @@
 -include env_make
 
-WORDPRESS_VER ?= 5.8.2
+WORDPRESS_VER ?= 5.8.3
 
 WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
 
