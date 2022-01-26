@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  WORDPRESS5: '5.8.3'
+  WORDPRESS5: '5.9'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
