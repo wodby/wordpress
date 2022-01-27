@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/wodby/wordpress/workflows/Build%20docker%20image/badge.svg)](https://github.com/wodby/wordpress/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
 [![Docker Stars](https://img.shields.io/docker/stars/wodby/wordpress.svg)](https://hub.docker.com/r/wodby/wordpress)
-[![Docker Layers](https://images.microbadger.com/badges/image/wodby/wordpress.svg)](https://microbadger.com/images/wodby/wordpress)
 
 ## Docker Images
 
@@ -20,8 +19,8 @@ Overview:
 
 | Supported tags and respective `Dockerfile` links | WordPress | PHP |
 |--------------------------------------------------|-----------|-----|
-| `5-8.1` [_(Dockerfile)_]                         | 5         | 8.1 |
-| `5-8.0`, `5-8`, `5`, `latest` [_(Dockerfile)_]   | 5         | 8.0 |
+| `5-8.1`, `5-8`, `5`, `latest` [_(Dockerfile)_]   | 5         | 8.1 |
+| `5-8.0` [_(Dockerfile)_]                         | 5         | 8.0 |
 | `5-7.4`, `5-7`                [_(Dockerfile)_]   | 5         | 7.4 |
 | `5-7.3` [_(Dockerfile)_]                         | 5         | 7.3 |
 
