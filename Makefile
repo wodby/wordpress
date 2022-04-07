@@ -19,16 +19,16 @@ ifneq ($(PHP_DEBUG),)
     TAG := $(TAG)-debug
 endif
 
-ifneq ($(BASE_IMAGE_STABILITY_TAG),)
-    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
-endif
-
 ifneq ($(PHP_DEBUG),)
     NAME := $(NAME)-debug
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-debug
 endif
 
 BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-alpine$(ALPINE_VER)
+
+ifneq ($(BASE_IMAGE_STABILITY_TAG),)
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
+endif
 
 ifneq ($(STABILITY_TAG),)
     ifneq ($(TAG),latest)
