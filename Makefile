@@ -5,6 +5,7 @@ WORDPRESS_VER ?= 5.9.3
 WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
 
 PHP_VER ?= 8.1
+ALPINE_VER ?= 3.15
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/wordpress
@@ -26,6 +27,8 @@ ifneq ($(PHP_DEBUG),)
     NAME := $(NAME)-debug
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-debug
 endif
+
+BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-alpine$(ALPINE_VER)
 
 ifneq ($(STABILITY_TAG),)
     ifneq ($(TAG),latest)
