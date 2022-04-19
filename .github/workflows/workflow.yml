@@ -35,7 +35,6 @@ jobs:
         php_ver: '8.1'
         tags: 5-8.1,5-8,5,latest
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   wordpress-5-80:
     runs-on: ubuntu-latest
     steps:
@@ -50,7 +49,6 @@ jobs:
         php_ver: '8.0'
         tags: 5-8.0
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
   wordpress-5-74:
     runs-on: ubuntu-latest
     steps:
@@ -65,49 +63,3 @@ jobs:
         php_ver: '7.4'
         tags: 5-7.4,5-7
         platform: linux/amd64,linux/arm64
-        alpine_ver: 3.15
-  wordpress-5-81-313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.WORDPRESS5 }}
-        php_ver: '8.1'
-        tags: 5-8.1-alpine3.13,5-8-alpine3.13,5-alpine3.13,alpine3.13
-        platform: linux/amd64,linux/arm64
-        alpine_ver: 3.13
-  wordpress-5-80-313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.WORDPRESS5 }}
-        php_ver: '8.0'
-        tags: 5-8.0-alpine3.13
-        platform: linux/amd64,linux/arm64
-        alpine_ver: 3.13
-  wordpress-5-74-313:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: docker/setup-qemu-action@v1
-      with:
-        platforms: amd64,arm64
-    - uses: docker/setup-buildx-action@v1
-    - uses: ./.github/actions
-      with:
-        version: ${{ env.WORDPRESS5 }}
-        php_ver: '7.4'
-        tags: 5-7.4-alpine3.13,5-7-alpine3.13
-        platform: linux/amd64,linux/arm64
-        alpine_ver: 3.13
