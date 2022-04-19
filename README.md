@@ -22,9 +22,6 @@ Overview:
 | `5-8.1`, `5-8`, `5`, `latest` [_(Dockerfile)_]                                      | 5         | 8.1 |
 | `5-8.0` [_(Dockerfile)_]                                                            | 5         | 8.0 |
 | `5-7.4`, `5-7`                [_(Dockerfile)_]                                      | 5         | 7.4 |
-| `5-8.1-alpine3.13`, `5-8-alpine3.13`, `5-alpine3.13`, `alpine3.13` [_(Dockerfile)_] | 5         | 8.1 |
-| `5-8.0-alpine3.13` [_(Dockerfile)_]                                                 | 5         | 8.0 |
-| `5-7.4-alpine3.13`, `5-7-alpine3.13` [_(Dockerfile)_]                               | 5         | 7.4 |
 
 All images built for `linux/amd64` and `linux/arm64`
 
