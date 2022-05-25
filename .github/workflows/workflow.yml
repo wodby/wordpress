@@ -12,12 +12,12 @@ on:
   pull_request:
 
 env:
-  WORDPRESS5: '5.9.3'
+  WORDPRESS6: '6.0'
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
-  wordpress-5-81:
+  wordpress-81:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -27,11 +27,11 @@ jobs:
     - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
-        version: ${{ env.WORDPRESS5 }}
+        version: ${{ env.WORDPRESS6 }}
         php_ver: '8.1'
-        tags: 5-8.1,5-8,5,latest
+        tags: 6-8.1,6-8,6,latest
         platform: linux/amd64,linux/arm64
-  wordpress-5-80:
+  wordpress-80:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -41,11 +41,11 @@ jobs:
     - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
-        version: ${{ env.WORDPRESS5 }}
+        version: ${{ env.WORDPRESS6 }}
         php_ver: '8.0'
-        tags: 5-8.0
+        tags: 6-8.0
         platform: linux/amd64,linux/arm64
-  wordpress-5-74:
+  wordpress-74:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -55,7 +55,7 @@ jobs:
     - uses: docker/setup-buildx-action@v1
     - uses: ./.github/actions
       with:
-        version: ${{ env.WORDPRESS5 }}
+        version: ${{ env.WORDPRESS6 }}
         php_ver: '7.4'
-        tags: 5-7.4,5-7
+        tags: 6-7.4,6-7
         platform: linux/amd64,linux/arm64
