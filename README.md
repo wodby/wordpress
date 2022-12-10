@@ -17,11 +17,11 @@ Overview:
 
 [_(Dockerfile)_]: https://github.com/wodby/wordpress/tree/master/4/Dockerfile
 
-| Supported tags and respective `Dockerfile` links                                    | WordPress | PHP |
-|-------------------------------------------------------------------------------------|-----------|-----|
-| `6-8.1`, `6-8`, `6`, `latest` [_(Dockerfile)_]                                      | 6         | 8.1 |
-| `6-8.0` [_(Dockerfile)_]                                                            | 6         | 8.0 |
-| `6-7.4`, `6-7`                [_(Dockerfile)_]                                      | 6         | 7.4 |
+| Supported tags and respective `Dockerfile` links | WordPress | PHP |
+|--------------------------------------------------|-----------|-----|
+| `6-8.2`, `6-8`, `6`, `latest` [_(Dockerfile)_]   | 6         | 8.2 |
+| `6-8.1` [_(Dockerfile)_]                         | 6         | 8.1 |
+| `6-8.0` [_(Dockerfile)_]                         | 6         | 8.0 |
 
 All images built for `linux/amd64` and `linux/arm64`
 
