@@ -19,7 +19,8 @@ Overview:
 
 | Supported tags and respective `Dockerfile` links | WordPress | PHP |
 |--------------------------------------------------|-----------|-----|
-| `6-8.3`, `6-8`, `6`, `latest` [_(Dockerfile)_]   | 6         | 8.3 |
+| `6-8.4`, `6-8`, `6`, `latest` [_(Dockerfile)_]   | 6         | 8.4 |
+| `6-8.3` [_(Dockerfile)_]                         | 6         | 8.3 |
 | `6-8.2` [_(Dockerfile)_]                         | 6         | 8.2 |
 | `6-8.1` [_(Dockerfile)_]                         | 6         | 8.1 |
 

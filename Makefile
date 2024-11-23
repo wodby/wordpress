@@ -4,7 +4,7 @@ WORDPRESS_VER ?= 6.7.1
 
 WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
 
-PHP_VER ?= 8.3
+PHP_VER ?= 8.4
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/wordpress
