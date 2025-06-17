@@ -18,7 +18,7 @@ env:
 
 
   # skip a few lines to avoid conflicts.
-  BASE_IMAGE_STABILITY_TAG: 4.66.0
+  BASE_IMAGE_STABILITY_TAG: 4.67.0
 
 jobs:
   wordpress-84:
