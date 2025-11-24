@@ -56,10 +56,9 @@ jobs:
       matrix:
         php: [ '8.5', '8.4', '8.3', '8.2', '8.1' ]
         include:
-          # here we assume we have only one major version of WordPress, so all the "latest" tags applied on the last PHP version.
+          # here we assume we have only one major version of WordPress, so all these "latest" tags applied on the last PHP version.
           - php: '8.5'
             latest: '1'
-            latest_major: '1'
             latest_major_php: '1'
             latest_php: '1'
     steps:
@@ -73,6 +72,7 @@ jobs:
           version: ${{ env.WORDPRESS6 }}
           php: ${{ matrix.php }}
           latest: ${{ matrix.latest }}
-          latest_major: ${{ matrix.latest_major }}
+          # here we assume we have only one major version of WordPress, so it's always the latest major.
+          latest_major: 1
           latest_php: ${{ matrix.latest_php }}
           latest_major_php: ${{ matrix.latest_major_php }}
