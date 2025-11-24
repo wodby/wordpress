@@ -1,36 +1,36 @@
-name: Build
-description: Build WordPress image
+name: push
+description: combine multi-arch image and push
 inputs:
   version:
-    description: drupal version
+    description: version
     required: true
-  php_ver:
-    description: php version
+  php:
+    description: version
     required: true
-  tags:
-    description: image tags
-    required: true
-  alpine_ver:
-    description: alpine version
-    required: true
-  platform:
-    description: docker platform
+  latest:
+    description: if tag latest
     required: false
-    default: linux/amd64
+  latest_major:
+    description: if tag latest major version
+    required: false
+  latest_php:
+    description: if provided php version is latest
+    required: false    
+  latest_major_php:
+    description: if provided php version is latest major
+    required: false    
 runs:
   using: "composite"
   steps:
-  - name: Build image
-    env:
-      WORDPRESS_VER: ${{ inputs.version }}
-      PHP_VER: ${{ inputs.php_ver }}
-      TAGS: ${{ inputs.tags }}
-      PLATFORM: ${{ inputs.platform }}
-      ALPINE_VER: ${{ inputs.alpine_ver }}
-    run: |
-      set -e
-      make buildx-build-amd64
-      make
-      make buildx-build
-      . $GITHUB_ACTION_PATH/release.sh
-    shell: bash
+    - name: Build image
+      env:
+        WORDPRESS_VER: ${{ inputs.version }}
+        PHP_VER: ${{ inputs.php }}
+        LATEST: ${{ inputs.latest }}
+        LATEST_MAJOR: ${{ inputs.latest_major }}
+        LATEST_PHP: ${{ inputs.latest_php }}
+        LATEST_MAJOR_PHP: ${{ inputs.latest_major_php }}
+      run: |
+        . $GITHUB_ACTION_PATH/release.sh
+      shell: bash
+      working-directory: ${{ inputs.workdir }}
