@@ -10,7 +10,7 @@
 
 Overview:
 
-- All images based on Alpine Linux
+- All images are based on Alpine Linux
 - Base image: [wodby/wordpress-php](https://github.com/wodby/wordpress-php)
 - [GitHub actions builds](https://github.com/wodby/wordpress/actions) 
 - [Docker Hub](https://hub.docker.com/r/wodby/wordpress)
@@ -19,7 +19,8 @@ Overview:
 
 | Supported tags and respective `Dockerfile` links | WordPress | PHP |
 |--------------------------------------------------|-----------|-----|
-| `6-8.4`, `6-8`, `6`, `latest` [_(Dockerfile)_]   | 6         | 8.4 |
+| `6-8.5`, `6-8`, `6`, `latest` [_(Dockerfile)_]   | 6         | 8.5 |
+| `6-8.4` [_(Dockerfile)_]                         | 6         | 8.3 |
 | `6-8.3` [_(Dockerfile)_]                         | 6         | 8.3 |
 | `6-8.2` [_(Dockerfile)_]                         | 6         | 8.2 |
 | `6-8.1` [_(Dockerfile)_]                         | 6         | 8.1 |
