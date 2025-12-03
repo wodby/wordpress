@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  WORDPRESS6: '6.8.3'
+  WORDPRESS6: '6.9'
 
 jobs:
   build:
