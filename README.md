@@ -23,7 +23,6 @@ Overview:
 | `6-8.4` [_(Dockerfile)_]                         | 6         | 8.3 |
 | `6-8.3` [_(Dockerfile)_]                         | 6         | 8.3 |
 | `6-8.2` [_(Dockerfile)_]                         | 6         | 8.2 |
-| `6-8.1` [_(Dockerfile)_]                         | 6         | 8.1 |
 
 All images built for `linux/amd64` and `linux/arm64`
 
