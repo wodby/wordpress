@@ -22,7 +22,7 @@ jobs:
   build:
     strategy:
       matrix:
-        php: [ '8.5', '8.4', '8.3', '8.2', '8.1' ]
+        php: [ '8.5', '8.4', '8.3', '8.2' ]
         arch:
           - amd64
           - arm64
@@ -54,7 +54,7 @@ jobs:
       - build
     strategy:
       matrix:
-        php: [ '8.5', '8.4', '8.3', '8.2', '8.1' ]
+        php: [ '8.5', '8.4', '8.3', '8.2' ]
         include:
           # here we assume we have only one major version of WordPress, so all these "latest" tags applied on the last PHP version.
           - php: '8.5'
