@@ -8,28 +8,32 @@ fi
 
 wp_ver=$1
 
-url="https://build.trac.wordpress.org/browser/tags/${wp_ver}/wp-config-sample.php?format=txt"
+archive_url="https://wordpress.org/wordpress-${wp_ver}.tar.gz"
 
 array=(
-    "./orig/wp-config-sample.php::${url}"
+    "./orig/wp-config-sample.php::wordpress/wp-config-sample.php"
 )
 
 outdated=0
+archive="/tmp/${RANDOM}-wordpress.tar.gz"
+
+curl -fsSL "${archive_url}" -o "${archive}"
+trap 'rm -f "${archive}"' EXIT
 
 for index in "${array[@]}" ; do
-    local="${index%%::*}"
-    url="${index##*::}"
+    file="${index%%::*}"
+    archive_path="${index##*::}"
 
     orig="/tmp/${RANDOM}"
-    wget -qO "${orig}" "${url}"
+    tar -xOf "${archive}" "${archive_path}" > "${orig}"
 
-    echo "Checking ${local}"
+    echo "Checking ${file}"
 
-    if diff --strip-trailing-cr "${local}" "${orig}"; then
+    if diff --strip-trailing-cr "${file}" "${orig}"; then
         echo "OK"
     else
         echo "!!! OUTDATED"
-        echo "${url}"
+        echo "${archive_url}"
         outdated=1
     fi
 

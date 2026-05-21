@@ -6,64 +6,68 @@ if [[ -n "${DEBUG}" ]]; then
     set -x
 fi
 
-if [[ "${GITHUB_REF}" == refs/heads/master || "${GITHUB_REF}" == refs/tags/* ]]; then      
-  minor_ver="${WORDPRESS_VER%.*}"
-  minor_tag="${minor_ver}"
-  major_tag="${minor_ver%.*}"
+if [[ ! "${WORDPRESS_VER}" =~ ^([0-9]+)\.([0-9]+)(\.([0-9]+))?$ ]]; then
+  echo "Unsupported stable WORDPRESS_VER format: ${WORDPRESS_VER}" >&2
+  exit 1
+fi
 
-  # e.g. wp version 6.8.3 and php 8.5
-  # 6.8-8.5
+major_tag="${BASH_REMATCH[1]}"
+minor_tag="${BASH_REMATCH[1]}.${BASH_REMATCH[2]}"
+
+if [[ "${GITHUB_REF}" == refs/heads/master || "${GITHUB_REF}" == refs/tags/* ]]; then
+  # e.g. wp version 7.0.1 and php 8.5
+  # 7.0-8.5
   tags=("${minor_tag}-${PHP_VER}")
 
-  # 6.8
+  # 7.0
   if [[ -n "${LATEST_PHP}" ]]; then
     tags+=("${minor_tag}")
   fi
 
   if [[ -n "${LATEST_MAJOR}" ]]; then
-    # 6-8.5
+    # 7-8.5
     tags+=("${major_tag}-${PHP_VER}")
     if [[ -n "${LATEST_PHP}" ]]; then
-      # 6
+      # 7
       tags+=("${major_tag}")
     fi
   fi
 
   if [[ -n "${LATEST_MAJOR_PHP}" ]]; then
-    # 6.8-8
+    # 7.0-8
     tags+=("${minor_tag}-${PHP_VER%.*}")
     if [[ -n "${LATEST_MAJOR}" ]]; then
-      # 6-8
-      tags+=("${major_tag}-${PHP_VER%.*}")      
+      # 7-8
+      tags+=("${major_tag}-${PHP_VER%.*}")
     fi
   fi
 
   if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
     # e.g. tag 1.2.3
     stability_tag="${GITHUB_REF##*/}"
-    # 6.8-8.5-1.2.3
+    # 7.0-8.5-1.2.3
     tags=("${minor_tag}-${PHP_VER}-${stability_tag}")
     if [[ -n "${LATEST_MAJOR}" ]]; then
-      # 6-8.5-1.2.3
+      # 7-8.5-1.2.3
       tags+=("${major_tag}-${PHP_VER}-${stability_tag}")
     fi
     if [[ -n "${LATEST_MAJOR_PHP}" ]]; then
-      # 6.8-8-1.2.3
+      # 7.0-8-1.2.3
       tags+=("${minor_tag}-${PHP_VER%.*}-${stability_tag}")
       if [[ -n "${LATEST_MAJOR}" ]]; then
-        # 6-8-1.2.3
+        # 7-8-1.2.3
         tags+=("${major_tag}-${PHP_VER%.*}-${stability_tag}")
       fi
     fi
     if [[ -n "${LATEST_PHP}" ]]; then
-      # 6.8-1.2.3
+      # 7.0-1.2.3
       tags+=("${minor_tag}-${stability_tag}")
       if [[ -n "${LATEST_MAJOR}" ]]; then
-        # 6-1.2.3
+        # 7-1.2.3
         tags+=("${major_tag}-${stability_tag}")
-      fi      
-    fi        
-  else          
+      fi
+    fi
+  else
     if [[ -n "${LATEST}" ]]; then
       tags+=("latest")
     fi
