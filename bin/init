@@ -44,7 +44,7 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
         # Accepted values are 'direct', 'ssh2', 'ftpext', 'ftpsockets', or 'false' to omit the constant and let WordPress decide.
         # Defaults to `define( 'FS_METHOD', 'direct' );` if FS_METHOD is not specified in .env.
         if [[ "${FS_METHOD}" != false ]]; then
-            insert_wp_config_line "${APP_ROOT}/wp-config.php" "define( 'FS_METHOD', '$(escape_sed_replacement "${FS_METHOD:-direct}")' );"
+            insert_wp_config_line "${APP_ROOT}/wp-config.php" "defined( 'FS_METHOD' ) || define( 'FS_METHOD', '$(escape_sed_replacement "${FS_METHOD:-direct}")' );"
         fi
         # WordPress Authentication Unique Keys and Salts.
         # If .env variables are not available keys & salts are auto-generated
