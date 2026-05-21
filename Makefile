@@ -1,16 +1,17 @@
 -include env_make
 
-WORDPRESS_VER ?= 6.9.4
+WORDPRESS_VER ?= 7.0
 
-WORDPRESS_VER_MAJOR ?= $(shell echo "${WORDPRESS_VER}" | grep -oE '^[0-9]+')
+WORDPRESS_VER_MAJOR ?= $(shell printf '%s' "$(WORDPRESS_VER)" | sed -E 's/^([0-9]+).*/\1/')
+WORDPRESS_VER_TAG ?= $(shell printf '%s' "$(WORDPRESS_VER)" | tr '[:upper:]' '[:lower:]')
 
 PHP_VER ?= 8.5
 BASE_IMAGE_TAG = $(PHP_VER)
 
 REPO = wodby/wordpress
-NAME = wordpress-$(WORDPRESS_VER_MAJOR)-$(PHP_VER)
+NAME = wordpress-$(WORDPRESS_VER_TAG)-$(PHP_VER)
 
-TAG ?= $(WORDPRESS_VER_MAJOR)-$(PHP_VER)
+TAG ?= $(WORDPRESS_VER_TAG)-$(PHP_VER)
 
 PLATFORM ?= linux/arm64
 

@@ -16,6 +16,17 @@ function generate_salt {
     echo "$NEW_SALT"
 }
 
+function escape_sed_replacement {
+    printf '%s' "$1" | sed -e 's/[\/&\\]/\\&/g'
+}
+
+function insert_wp_config_line {
+    local file=$1
+    local line=$2
+
+    sed -i "/^\\/\\* That's all, stop editing! /i $(escape_sed_replacement "${line}")" "${file}"
+}
+
 if [[ ! -f "${APP_ROOT}/index.php" ]]; then
     echo "${APP_NAME} not found in ${APP_ROOT} - copying now..."
     rsync -a "${src_dir}/" "${APP_ROOT}/"
@@ -24,27 +35,27 @@ if [[ ! -f "${APP_ROOT}/index.php" ]]; then
     # docker4wordpress
     if [[ -z "${WODBY_APP_NAME}" ]]; then
         su-exec wodby cp "${APP_ROOT}/wp-config-sample.php" "${APP_ROOT}/wp-config.php"
-        sed -i "s/database_name_here/${DB_NAME:-wordpress}/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/username_here/${DB_USER:-wordpress}/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/password_here/${DB_PASSWORD:-wordpress}/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'DB_HOST', 'localhost'/'DB_HOST', '${DB_HOST:-mariadb}'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'DB_CHARSET', 'utf8'/'DB_CHARSET', '${DB_CHARSET:-utf8}'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/database_name_here/$(escape_sed_replacement "${DB_NAME:-wordpress}")/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/username_here/$(escape_sed_replacement "${DB_USER:-wordpress}")/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/password_here/$(escape_sed_replacement "${DB_PASSWORD:-wordpress}")/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'DB_HOST', '[^']*'/'DB_HOST', '$(escape_sed_replacement "${DB_HOST:-mariadb}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'DB_CHARSET', '[^']*'/'DB_CHARSET', '$(escape_sed_replacement "${DB_CHARSET:-utf8mb4}")'/" "${APP_ROOT}/wp-config.php"
         # Set the WordPress Filesystem Method (see: https://wordpress.org/support/article/editing-wp-config-php/#wordpress-upgrade-constants)
         # Accepted values are 'direct', 'ssh2', 'ftpext', 'ftpsockets', or 'false' to omit the constant and let WordPress decide.
-        # Defaults to `define('FS_METHOD', 'direct')` if not FS_METHOD is not specified in .env.
+        # Defaults to `define( 'FS_METHOD', 'direct' );` if FS_METHOD is not specified in .env.
         if [[ "${FS_METHOD}" != false ]]; then
-            echo "define('FS_METHOD', '${FS_METHOD:-direct}');" >> "${APP_ROOT}/wp-config.php"
+            insert_wp_config_line "${APP_ROOT}/wp-config.php" "define( 'FS_METHOD', '$(escape_sed_replacement "${FS_METHOD:-direct}")' );"
         fi
         # WordPress Authentication Unique Keys and Salts.
         # If .env variables are not available keys & salts are auto-generated
-        sed -i "s/'AUTH_KEY',.*'/'AUTH_KEY', '$(echo ${WP_AUTH_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'SECURE_AUTH_KEY',.*'/'SECURE_AUTH_KEY', '$(echo ${WP_SECURE_AUTH_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'LOGGED_IN_KEY',.*'/'LOGGED_IN_KEY', '$(echo ${WP_LOGGED_IN_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'NONCE_KEY',.*'/'NONCE_KEY', '$(echo ${WP_NONCE_KEY:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'AUTH_SALT',.*'/'AUTH_SALT', '$(echo ${WP_AUTH_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'SECURE_AUTH_SALT',.*'/'SECURE_AUTH_SALT', '$(echo ${WP_SECURE_AUTH_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'LOGGED_IN_SALT',.*'/'LOGGED_IN_SALT', '$(echo ${WP_LOGGED_IN_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
-        sed -i "s/'NONCE_SALT',.*'/'NONCE_SALT', '$(echo ${WP_NONCE_SALT:-$(generate_salt)} | sed -e 's:\\:\\\\:g; s:\/:\\\/:g; s:&:\\\&:g')'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'AUTH_KEY',.*'/'AUTH_KEY', '$(escape_sed_replacement "${WP_AUTH_KEY:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'SECURE_AUTH_KEY',.*'/'SECURE_AUTH_KEY', '$(escape_sed_replacement "${WP_SECURE_AUTH_KEY:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'LOGGED_IN_KEY',.*'/'LOGGED_IN_KEY', '$(escape_sed_replacement "${WP_LOGGED_IN_KEY:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'NONCE_KEY',.*'/'NONCE_KEY', '$(escape_sed_replacement "${WP_NONCE_KEY:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'AUTH_SALT',.*'/'AUTH_SALT', '$(escape_sed_replacement "${WP_AUTH_SALT:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'SECURE_AUTH_SALT',.*'/'SECURE_AUTH_SALT', '$(escape_sed_replacement "${WP_SECURE_AUTH_SALT:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'LOGGED_IN_SALT',.*'/'LOGGED_IN_SALT', '$(escape_sed_replacement "${WP_LOGGED_IN_SALT:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
+        sed -i "s/'NONCE_SALT',.*'/'NONCE_SALT', '$(escape_sed_replacement "${WP_NONCE_SALT:-$(generate_salt)}")'/" "${APP_ROOT}/wp-config.php"
     fi
 else
     latest_ver=$(su-exec wodby wp core version --path="${src_dir}")

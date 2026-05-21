@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  WORDPRESS6: '6.9.4'
+  WORDPRESS_VER: '7.0'
 
 jobs:
   build:
@@ -30,13 +30,13 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v6
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: build and push
         env:
-          WORDPRESS_VER: ${{ env.WORDPRESS6 }}
+          WORDPRESS_VER: ${{ env.WORDPRESS_VER }}
           PHP_VER: ${{ matrix.php }}
           ARCH: ${{ matrix.arch }}
         run: |
@@ -59,16 +59,17 @@ jobs:
             latest_php: '1'
     steps:
       - uses: actions/checkout@v6
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - uses: ./.github/actions
         with:
-          version: ${{ env.WORDPRESS6 }}
+          version: ${{ env.WORDPRESS_VER }}
           php: ${{ matrix.php }}
           latest: ${{ matrix.latest }}
-          # here we assume we have only one major version of WordPress, so it's always the latest major.
+          # This branch publishes one stable WordPress track at a time, so the configured
+          # series remains the latest major until the default version is changed.
           latest_major: 1
           latest_php: ${{ matrix.latest_php }}
           latest_major_php: ${{ matrix.latest_major_php }}

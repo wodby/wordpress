@@ -6,7 +6,7 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags (`wodby/wordpress:6-X.X.X`) which correspond to [git tags](https://github.com/wodby/wordpress/releases). We strongly recommend using images only with stability tags. 
+❗For better reliability we release images with stability tags such as `wodby/wordpress:7-X.X.X`, which correspond to [git tags](https://github.com/wodby/wordpress/releases). We strongly recommend using images only with stability tags.
 
 Overview:
 
@@ -19,12 +19,19 @@ Overview:
 
 | Supported tags and respective `Dockerfile` links | WordPress | PHP |
 |--------------------------------------------------|-----------|-----|
-| `6-8.5`, `6-8`, `6`, `latest` [_(Dockerfile)_]   | 6         | 8.5 |
-| `6-8.4` [_(Dockerfile)_]                         | 6         | 8.3 |
-| `6-8.3` [_(Dockerfile)_]                         | 6         | 8.3 |
-| `6-8.2` [_(Dockerfile)_]                         | 6         | 8.2 |
+| `7-8.5`, `7-8`, `7`, `latest` [_(Dockerfile)_]   | 7         | 8.5 |
+| `7-8.4` [_(Dockerfile)_]                         | 7         | 8.4 |
+| `7-8.3` [_(Dockerfile)_]                         | 7         | 8.3 |
+| `7-8.2` [_(Dockerfile)_]                         | 7         | 8.2 |
 
 All images built for `linux/amd64` and `linux/arm64`
+
+To build or test a specific upstream WordPress release explicitly, override `WORDPRESS_VER`:
+
+```bash
+make build WORDPRESS_VER=7.0
+make test WORDPRESS_VER=7.0
+```
 
 ## Environment Variables
 
