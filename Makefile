@@ -1,6 +1,6 @@
 -include env_make
 
-WORDPRESS_VER ?= 7.0
+WORDPRESS_VER ?= 7.0.1
 
 WORDPRESS_VER_MAJOR ?= $(shell printf '%s' "$(WORDPRESS_VER)" | sed -E 's/^([0-9]+).*/\1/')
 WORDPRESS_VER_TAG ?= $(shell printf '%s' "$(WORDPRESS_VER)" | tr '[:upper:]' '[:lower:]')
