@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  WORDPRESS_VER: '7.0.1'
+  WORDPRESS_VER: '7.0.2'
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: build and push
         env:
-          WORDPRESS_VER: '7.0.1'
+          WORDPRESS_VER: '7.0.2'
           PHP_VER: ${{ matrix.php }}
           ARCH: ${{ matrix.arch }}
         run: |
