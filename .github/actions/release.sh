@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Version aliases identify published releases; only primary tags publish images.
+if [[ "${GITHUB_REF:-}" =~ ^refs/tags/.+-r[0-9]+$ ]]; then
+    exit 0
+fi
+
 set -e
 
 if [[ -n "${DEBUG}" ]]; then
@@ -43,28 +48,28 @@ if [[ "${GITHUB_REF}" == refs/heads/master || "${GITHUB_REF}" == refs/tags/* ]];
   fi
 
   if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
-    # e.g. tag 1.2.3
-    stability_tag="${GITHUB_REF##*/}"
-    # 7.0-8.5-1.2.3
-    tags=("${minor_tag}-${PHP_VER}-${stability_tag}")
+    # e.g. tag r23
+    image_revision="${GITHUB_REF##*/}"
+    # 7.0-8.5-r23
+    tags=("${minor_tag}-${PHP_VER}-${image_revision}")
     if [[ -n "${LATEST_MAJOR}" ]]; then
-      # 7-8.5-1.2.3
-      tags+=("${major_tag}-${PHP_VER}-${stability_tag}")
+      # 7-8.5-r23
+      tags+=("${major_tag}-${PHP_VER}-${image_revision}")
     fi
     if [[ -n "${LATEST_MAJOR_PHP}" ]]; then
-      # 7.0-8-1.2.3
-      tags+=("${minor_tag}-${PHP_VER%.*}-${stability_tag}")
+      # 7.0-8-r23
+      tags+=("${minor_tag}-${PHP_VER%.*}-${image_revision}")
       if [[ -n "${LATEST_MAJOR}" ]]; then
-        # 7-8-1.2.3
-        tags+=("${major_tag}-${PHP_VER%.*}-${stability_tag}")
+        # 7-8-r23
+        tags+=("${major_tag}-${PHP_VER%.*}-${image_revision}")
       fi
     fi
     if [[ -n "${LATEST_PHP}" ]]; then
-      # 7.0-1.2.3
-      tags+=("${minor_tag}-${stability_tag}")
+      # 7.0-r23
+      tags+=("${minor_tag}-${image_revision}")
       if [[ -n "${LATEST_MAJOR}" ]]; then
-        # 7-1.2.3
-        tags+=("${major_tag}-${stability_tag}")
+        # 7-r23
+        tags+=("${major_tag}-${image_revision}")
       fi
     fi
   else

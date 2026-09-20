@@ -4,14 +4,15 @@ on:
   push:
     branches:
       - master
-      - 4.x
 
     tags:
       - '*'
+      - '!*-r[0-9]*'
 
   pull_request:
 
 env:
+  BASE_IMAGE_REVISION: 4.81.3
   WORDPRESS_VER: '7.1.1'
 
 jobs:
@@ -81,3 +82,18 @@ jobs:
           latest_major: 1
           latest_php: ${{ matrix.latest_php }}
           latest_major_php: ${{ matrix.latest_major_php }}
+
+  image-revision-aliases:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/r')
+    needs: [ push ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: image-revision-aliases-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: wodby/images/.github/actions/image-revision-aliases@6a3956567002e48847338be97b4d955ee40ae7cb
+        with:
+          docker_username: ${{ secrets.DOCKER_USERNAME }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}

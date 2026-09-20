@@ -1,5 +1,8 @@
 -include env_make
 
+# Accept legacy build arguments during the image revision transition.
+BASE_IMAGE_REVISION ?= $(BASE_IMAGE_STABILITY_TAG)
+
 WORDPRESS_VER ?= 7.1.1
 
 WORDPRESS_VER_MAJOR ?= $(shell printf '%s' "$(WORDPRESS_VER)" | sed -E 's/^([0-9]+).*/\1/')
@@ -24,8 +27,8 @@ ifneq ($(PHP_DEBUG),)
     BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-debug
 endif
 
-ifneq ($(BASE_IMAGE_STABILITY_TAG),)
-    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_STABILITY_TAG)
+ifneq ($(BASE_IMAGE_REVISION),)
+    BASE_IMAGE_TAG := $(BASE_IMAGE_TAG)-$(BASE_IMAGE_REVISION)
 endif
 
 IMAGETOOLS_TAG ?= $(TAG)

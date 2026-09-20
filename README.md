@@ -6,7 +6,14 @@
 
 ## Docker Images
 
-❗For better reliability we release images with stability tags such as `wodby/wordpress:7-X.X.X`, which correspond to [git tags](https://github.com/wodby/wordpress/releases). We strongly recommend using images only with stability tags.
+Use image revision tags such as `wodby/wordpress:7-rN` to select a Wodby image revision.
+Major and minor tags use the repository release number, starting at `r0`. Full-version tags such as
+`wodby/wordpress:7.1.1-r0` start at `r0` for each exact upstream version.
+Every published versioned revision tag has a matching annotated Git tag pointing to its release commit.
+Existing tags remain available after support for their major or minor version ends.
+Initial WordPress releases named `7.2` use `7.2.0-r0` for the full-version tag.
+See [release tags](https://github.com/wodby/wordpress/tags) for available revisions and the [image revision policy](https://github.com/wodby/images#image-revisions) for upgrade guidance.
+Previously published image tags remain available.
 
 Overview:
 
