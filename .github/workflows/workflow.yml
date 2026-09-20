@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - 4.x
 
     tags:
       - '*'
@@ -13,6 +12,7 @@ on:
   pull_request:
 
 env:
+  BASE_IMAGE_REVISION: 4.81.3
   WORDPRESS_VER: '7.1.1'
 
 jobs:
