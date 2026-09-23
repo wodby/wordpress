@@ -3,7 +3,7 @@
 # Accept legacy build arguments during the image revision transition.
 BASE_IMAGE_REVISION ?= $(BASE_IMAGE_STABILITY_TAG)
 
-WORDPRESS_VER ?= 7.1.1
+WORDPRESS_VER ?= 7.1.2
 
 WORDPRESS_VER_MAJOR ?= $(shell printf '%s' "$(WORDPRESS_VER)" | sed -E 's/^([0-9]+).*/\1/')
 WORDPRESS_VER_TAG ?= $(shell printf '%s' "$(WORDPRESS_VER)" | tr '[:upper:]' '[:lower:]')
