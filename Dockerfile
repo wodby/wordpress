@@ -12,6 +12,9 @@ ENV WP_VER="${WORDPRESS_VER}" \
 
 USER root
 
+# Refresh inherited security fixes when rebuilding this image.
+RUN apk upgrade --no-cache
+
 RUN set -ex; \
     \
     mv /usr/local/bin/actions.mk /usr/local/bin/wordpress-php.mk; \
