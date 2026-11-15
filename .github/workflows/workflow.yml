@@ -12,7 +12,7 @@ on:
   pull_request:
 
 env:
-  BASE_IMAGE_REVISION: r17
+  BASE_IMAGE_REVISION: r18
   WORDPRESS_VER: '7.1.4'
 
 jobs:
