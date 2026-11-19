@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  BASE_IMAGE_REVISION: r19
+  BASE_IMAGE_REVISION: r20
   WORDPRESS_VER: '7.1.5'
 
 jobs:
